@@ -72,6 +72,10 @@ LoginWindow::LoginWindow(QWidget *parent) : QMainWindow(parent)
     // Aggiungi un altro "stretch" verticale sotto il blocco di login per spingerlo verso il centro/alto
     mainLayout->addStretch(2); // Spazio elastico 2 (insieme al primo, centra il widget intermedio)
 
+    //connect
+    connect(loginButton, &QPushButton::clicked, this, &LoginWindow::onLoginButtonClicked);
+
+
 }
 
 void LoginWindow::onLoginButtonClicked()

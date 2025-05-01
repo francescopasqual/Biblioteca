@@ -54,3 +54,13 @@ void AppController::handleLoginRequest(const QString &username, const QString &p
 
 
 }
+
+void AppController::handleGlobalSearch(const QString &query)
+{
+    //logica per chiamare il modello e cambiare view
+}
+
+void AppController::handleCategorySelected(const QString &categoryName)
+{
+
+}

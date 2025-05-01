@@ -36,6 +36,10 @@ private slots:
     */
     void handleLoginRequest(const QString& username, const QString& password);
 
+    void handleGlobalSearch(const QString& query);
+
+    void handleCategorySelected(const QString& categoryName);
+
 
 
 signals:
