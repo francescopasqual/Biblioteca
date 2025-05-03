@@ -4,17 +4,15 @@
 #include <QObject>
 #include <vector>
 #include "item.h"
-#include "libro.h"
-#include "film.h"
-#include "vinile.h"
+#include <QDebug>
 
 class Biblioteca : public QObject
 {
     Q_OBJECT
 
 private:
-    std::vector<Item*> catalogo;
 
+    std::vector<Item*> catalogo;
 
 public:
     // Constructor
@@ -38,8 +36,6 @@ public:
     //ricerca per anno generale
     std::vector<Item*> searchByYear(int anno) const;
 
-    //RICERCHE SPECIFICHE
-
     //LIBRI
     //ricerca per genere
     std::vector<Item*> searchByGenre(string genere) const;
@@ -57,6 +53,7 @@ public:
     std::vector<Item*> searchByPerformer(string performer) const;
     //ricerca per genere_musicale
     std::vector<Item*> searchByGenereMusicale(string genere) const;
+
 
     //FUNZIONI DI PRESTITO
     bool prestaItem(Item* item);

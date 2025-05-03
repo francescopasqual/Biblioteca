@@ -1,14 +1,34 @@
 #include "vinile.h"
 
-Vinile::Vinile(string t, int an, int c, int pr, string p, string g, QObject *parent)
-    : Item(t,an,c,pr,parent), performer(p), genere_musicale(g) {}
-
-void Vinile::showInfo() const
+//costruttore
+int Vinile::getNumeroTracce() const
 {
-    Item::showInfo();
-    cout << "\n" << "Performer: " << performer << "\n" << "Genere musicale: " << genere_musicale << endl;
+    return numeroTracce;
 }
 
-string Vinile::getPerformer() const { return performer; }
+int Vinile::getDurataTotale() const
+{
+    return durataTotale;
+}
 
-string Vinile::getGenereMusicale() const { return genere_musicale; }
+Vinile::Vinile(string t, string performer, string genere, int an, int c, int p, int nt, int dt, QObject* parent)
+    : Item(t, performer, genere, an, c, p, parent),
+    numeroTracce(nt), durataTotale(dt)
+{
+}
+
+string Vinile::getTipoCreatore() const
+{
+    return "Performer"; // Specifica la dicitura per i vinili
+}
+
+// Implementazione del metodo virtuale showInfo() per Vinile
+void Vinile::showInfo() const
+{
+    // Chiama il metodo showInfo() della classe base per stampare le informazioni comuni (Titolo, Performer, Genere, Anno, Copie)
+    Item::showInfo();
+    // Stampa le informazioni specifiche del Vinile
+    std::cout << "Numero tracce: " << numeroTracce << std::endl;
+    std::cout << "Durata totale: " << durataTotale << " minuti" << std::endl;
+}
+

@@ -2,6 +2,8 @@
 #include <QApplication>
 #include "appcontroller.h" // Il nostro Controller principale
 
+Q_DECLARE_METATYPE(Item*)
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv); // Inizializza l'applicazione Qt

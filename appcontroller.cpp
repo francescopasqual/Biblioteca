@@ -77,9 +77,42 @@ void AppController::handleLoginRequest(const QString &username, const QString &p
 void AppController::handleGlobalSearch(const QString &query)
 {
     //logica per chiamare il modello e cambiare view
+    std::string stdQuery = query.toStdString();
+
+    std::vector<Item*> results = bibliotecaModel->searchByTitle(stdQuery);
+
+    //se la ricerca non ha prodotto risultati
+    if(results.empty()){
+        qDebug() << "AppController: Nessun risultato trovato per la ricerca globale.";
+        catalogScreen->showErrorMessage("Nessun risultato trovato.");
+
+    /*Altrimenti:
+     * - se contiene un solo item => mostriamo una finestra specifica per l'item dettagliato
+     * - se contiene più item => mostriamo una finestra con la lista dei risultati
+     * */
+    }else if(results.size()==1){
+        qDebug() << "AppController: Un risultato trovato per la ricerca globale.";
+        //mostrare una finestra specifica per l'item dettagliato
+    }else{
+        qDebug() << "AppController: Più risultati trovati per la ricerca globale.";
+        //mostrare una finestra con la lista dei risultati
+    }
 }
+
+
 
 void AppController::handleCategorySelected(const QString &categoryName)
 {
+    std::string stdCategoryName = categoryName.toStdString();
 
+    std::vector<Item*> results;
+
+    //distinzione per le 3 categorie
+    if(categoryName == "Libri"){
+        results = bibliotecaModel->searchByGenre(stdCategoryName);
+    }else if(categoryName == "Film"){
+        results = bibliotecaModel->searchByGenere(stdCategoryName);
+    }else {
+
+    }
 }

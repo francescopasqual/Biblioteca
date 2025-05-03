@@ -3,19 +3,18 @@
 
 #include "item.h"
 
-class Film : public Item
-{
+class Film : public Item {
+
 private:
-    string regista;
-    string genere;
+    int durata;//in minuti
+    std::string attore_principale;
 
 public:
-    Film(string t, int an, int c, int pr, string r, string g, QObject *parent = nullptr);
+    Film(std::string t, std::string regista, std::string genere, int an, int c, int p, int d, std::string ap, QObject* parent = nullptr);
+    std::string getTipoCreatore() const override;
     void showInfo() const override;
-
-    //getter
-    string getRegista() const;
-    string getGenere() const;
+    int getDurata() const;
+    std::string getAttore_principale() const;
 };
 
 #endif // FILM_H

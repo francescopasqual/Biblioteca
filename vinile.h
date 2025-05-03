@@ -3,18 +3,20 @@
 
 #include "item.h"
 
-class Vinile : public Item
-{
+class Vinile : public Item {
 private:
-    string performer;
-    string genere_musicale;
+
+    int numeroTracce;
+    int durataTotale;
+
 public:
-    Vinile(string t, int an, int c, int pr, string p, string g, QObject *parent = nullptr);
+    Vinile(string t, string performer, string genere, int an, int c, int p, int nt, int dt, QObject* parent = nullptr);
+    string getTipoCreatore() const override;
     void showInfo() const override;
 
-    //getter
-    string getPerformer() const;
-    string getGenereMusicale() const;
+
+    int getNumeroTracce() const;
+    int getDurataTotale() const;
 };
 
 #endif // VINILE_H

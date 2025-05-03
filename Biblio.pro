@@ -21,6 +21,7 @@ SOURCES += \
     fisico.cpp \
     formato.cpp \
     item.cpp \
+    itemlistscreen.cpp \
     libro.cpp \
     loginscreen.cpp \
     main.cpp \
@@ -41,14 +42,14 @@ HEADERS += \
     fisico.h \
     formato.h \
     item.h \
+    itemlistscreen.h \
     libro.h \
     loginscreen.h \
     mainwindow.h \
     mp4.h \
     vinile.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

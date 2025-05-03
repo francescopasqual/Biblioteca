@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-INCPATH       = -I../../../Biblio -I. -I../../../../Qt/6.8.2/gcc_64/include -I../../../../Qt/6.8.2/gcc_64/include/QtWidgets -I../../../../Qt/6.8.2/gcc_64/include/QtGui -I../../../../Qt/6.8.2/gcc_64/include/QtCore -I. -I. -I../../../../Qt/6.8.2/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../../../Biblio -I. -I../../../../Qt/6.8.2/gcc_64/include -I../../../../Qt/6.8.2/gcc_64/include/QtWidgets -I../../../../Qt/6.8.2/gcc_64/include/QtGui -I../../../../Qt/6.8.2/gcc_64/include/QtCore -I. -I../../../../Qt/6.8.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/francesco/Qt/6.8.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -56,7 +56,7 @@ SOURCES       = ../../appcontroller.cpp \
 		../../authenticator.cpp \
 		../../biblioteca.cpp \
 		../../cartaceo.cpp \
-		../../catalogwindow.cpp \
+		../../catalogscreen.cpp \
 		../../digitale.cpp \
 		../../disco.cpp \
 		../../epub.cpp \
@@ -64,24 +64,26 @@ SOURCES       = ../../appcontroller.cpp \
 		../../fisico.cpp \
 		../../formato.cpp \
 		../../item.cpp \
+		../../itemlistscreen.cpp \
 		../../libro.cpp \
-		../../loginwindow.cpp \
+		../../loginscreen.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../mp4.cpp \
 		../../vinile.cpp moc_appcontroller.cpp \
 		moc_authenticator.cpp \
 		moc_biblioteca.cpp \
-		moc_catalogwindow.cpp \
+		moc_catalogscreen.cpp \
 		moc_formato.cpp \
 		moc_item.cpp \
-		moc_loginwindow.cpp \
+		moc_itemlistscreen.cpp \
+		moc_loginscreen.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = appcontroller.o \
 		authenticator.o \
 		biblioteca.o \
 		cartaceo.o \
-		catalogwindow.o \
+		catalogscreen.o \
 		digitale.o \
 		disco.o \
 		epub.o \
@@ -89,8 +91,9 @@ OBJECTS       = appcontroller.o \
 		fisico.o \
 		formato.o \
 		item.o \
+		itemlistscreen.o \
 		libro.o \
-		loginwindow.o \
+		loginscreen.o \
 		main.o \
 		mainwindow.o \
 		mp4.o \
@@ -98,10 +101,11 @@ OBJECTS       = appcontroller.o \
 		moc_appcontroller.o \
 		moc_authenticator.o \
 		moc_biblioteca.o \
-		moc_catalogwindow.o \
+		moc_catalogscreen.o \
 		moc_formato.o \
 		moc_item.o \
-		moc_loginwindow.o \
+		moc_itemlistscreen.o \
+		moc_loginscreen.o \
 		moc_mainwindow.o
 DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/Qt/6.8.2/gcc_64/mkspecs/common/unix.conf \
@@ -344,7 +348,7 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../authenticator.h \
 		../../biblioteca.h \
 		../../cartaceo.h \
-		../../catalogwindow.h \
+		../../catalogscreen.h \
 		../../digitale.h \
 		../../disco.h \
 		../../epub.h \
@@ -352,15 +356,16 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../fisico.h \
 		../../formato.h \
 		../../item.h \
+		../../itemlistscreen.h \
 		../../libro.h \
-		../../loginwindow.h \
+		../../loginscreen.h \
 		../../mainwindow.h \
 		../../mp4.h \
 		../../vinile.h ../../appcontroller.cpp \
 		../../authenticator.cpp \
 		../../biblioteca.cpp \
 		../../cartaceo.cpp \
-		../../catalogwindow.cpp \
+		../../catalogscreen.cpp \
 		../../digitale.cpp \
 		../../disco.cpp \
 		../../epub.cpp \
@@ -368,8 +373,9 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../fisico.cpp \
 		../../formato.cpp \
 		../../item.cpp \
+		../../itemlistscreen.cpp \
 		../../libro.cpp \
-		../../loginwindow.cpp \
+		../../loginscreen.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../mp4.cpp \
@@ -382,7 +388,7 @@ TARGET        = Biblio
 first: all
 ####### Build rules
 
-Biblio: ui_mainwindow.h $(OBJECTS)  
+Biblio:  $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../../Biblio.pro ../../../../Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -883,9 +889,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../appcontroller.h ../../authenticator.h ../../biblioteca.h ../../cartaceo.h ../../catalogwindow.h ../../digitale.h ../../disco.h ../../epub.h ../../film.h ../../fisico.h ../../formato.h ../../item.h ../../libro.h ../../loginwindow.h ../../mainwindow.h ../../mp4.h ../../vinile.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../appcontroller.cpp ../../authenticator.cpp ../../biblioteca.cpp ../../cartaceo.cpp ../../catalogwindow.cpp ../../digitale.cpp ../../disco.cpp ../../epub.cpp ../../film.cpp ../../fisico.cpp ../../formato.cpp ../../item.cpp ../../libro.cpp ../../loginwindow.cpp ../../main.cpp ../../mainwindow.cpp ../../mp4.cpp ../../vinile.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../../appcontroller.h ../../authenticator.h ../../biblioteca.h ../../cartaceo.h ../../catalogscreen.h ../../digitale.h ../../disco.h ../../epub.h ../../film.h ../../fisico.h ../../formato.h ../../item.h ../../itemlistscreen.h ../../libro.h ../../loginscreen.h ../../mainwindow.h ../../mp4.h ../../vinile.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../appcontroller.cpp ../../authenticator.cpp ../../biblioteca.cpp ../../cartaceo.cpp ../../catalogscreen.cpp ../../digitale.cpp ../../disco.cpp ../../epub.cpp ../../film.cpp ../../fisico.cpp ../../formato.cpp ../../item.cpp ../../itemlistscreen.cpp ../../libro.cpp ../../loginscreen.cpp ../../main.cpp ../../mainwindow.cpp ../../mp4.cpp ../../vinile.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -917,9 +922,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o moc_predefs.h ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_appcontroller.cpp moc_authenticator.cpp moc_biblioteca.cpp moc_catalogwindow.cpp moc_formato.cpp moc_item.cpp moc_loginwindow.cpp moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_appcontroller.cpp moc_authenticator.cpp moc_biblioteca.cpp moc_catalogscreen.cpp moc_formato.cpp moc_item.cpp moc_itemlistscreen.cpp moc_loginscreen.cpp moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_appcontroller.cpp moc_authenticator.cpp moc_biblioteca.cpp moc_catalogwindow.cpp moc_formato.cpp moc_item.cpp moc_loginwindow.cpp moc_mainwindow.cpp
+	-$(DEL_FILE) moc_appcontroller.cpp moc_authenticator.cpp moc_biblioteca.cpp moc_catalogscreen.cpp moc_formato.cpp moc_item.cpp moc_itemlistscreen.cpp moc_loginscreen.cpp moc_mainwindow.cpp
 moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
@@ -1025,10 +1030,19 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../biblioteca.h \
 		../../item.h \
 		../../formato.h \
-		../../libro.h \
-		../../film.h \
-		../../vinile.h \
-		../../loginwindow.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1052,7 +1066,6 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcolor.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgb.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgba64.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qimage.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixelformat.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtransform.h \
@@ -1062,16 +1075,6 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20iterator.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qline.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvariant.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpalette.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbrush.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfont.h \
@@ -1143,12 +1146,14 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../catalogwindow.h \
+		../../catalogscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/QPixmap \
 		../../authenticator.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QString \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QHash \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../mainwindow.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QStackedWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstackedwidget.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../appcontroller.h -o moc_appcontroller.cpp
@@ -1377,14 +1382,23 @@ moc_biblioteca.cpp: ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		../../item.h \
 		../../formato.h \
-		../../libro.h \
-		../../film.h \
-		../../vinile.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../biblioteca.h -o moc_biblioteca.cpp
 
-moc_catalogwindow.cpp: ../../catalogwindow.h \
+moc_catalogscreen.cpp: ../../catalogscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1603,7 +1617,7 @@ moc_catalogwindow.cpp: ../../catalogwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../catalogwindow.h -o moc_catalogwindow.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../catalogscreen.h -o moc_catalogscreen.cpp
 
 moc_formato.cpp: ../../formato.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
@@ -1818,7 +1832,235 @@ moc_item.cpp: ../../item.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../item.h -o moc_item.cpp
 
-moc_loginwindow.cpp: ../../loginwindow.h \
+moc_itemlistscreen.cpp: ../../itemlistscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfiginclude.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationdefinitions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qassert.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtnoop.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypes.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversion.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qyieldcpu.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qforeach.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmalloc.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qminmax.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qoverload.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qswap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtresource.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttranslation.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcomparehelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpair.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20functional.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20memory.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlatin1stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qanystringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfloat16.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmath.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterable.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmargins.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q23utility.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qaction.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qicon.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsize.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrect.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpoint.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgba64.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qimage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixelformat.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtransform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpolygon.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qregion.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qspan.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20iterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qline.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvariant.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpalette.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfont.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qendian.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcursor.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbitmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qevent.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qurl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qeventpoint.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvector2d.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvectornd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpointingdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qinputdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QList \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QRect \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QSize \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QSizeF \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/QTransform \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnativeinterface.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qscreen_platform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qelapsedtimer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfuture.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfutureinterface.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmutex.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtsan_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qresultstore.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfuture_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qthreadpool.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qthread.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qexception.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpromise.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication_platform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpicture.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QTableWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtablewidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtableview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QTableWidgetItem \
+		../../item.h \
+		../../formato.h \
+		moc_predefs.h \
+		../../../../Qt/6.8.2/gcc_64/libexec/moc
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../itemlistscreen.h -o moc_itemlistscreen.cpp
+
+moc_loginscreen.cpp: ../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -2036,7 +2278,7 @@ moc_loginwindow.cpp: ../../loginwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHBoxLayout \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../loginwindow.h -o moc_loginwindow.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../loginscreen.h -o moc_loginscreen.cpp
 
 moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
@@ -2229,6 +2471,9 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication_platform.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QStackedWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstackedwidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qframe.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
@@ -2237,20 +2482,15 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all:
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../../mainwindow.ui \
-		../../../../Qt/6.8.2/gcc_64/libexec/uic
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/uic ../../mainwindow.ui -o ui_mainwindow.h
-
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -2359,10 +2599,19 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../biblioteca.h \
 		../../item.h \
 		../../formato.h \
-		../../libro.h \
-		../../film.h \
-		../../vinile.h \
-		../../loginwindow.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -2386,7 +2635,6 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcolor.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgb.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgba64.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qimage.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixelformat.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtransform.h \
@@ -2396,16 +2644,6 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20iterator.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qline.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvariant.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpalette.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbrush.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfont.h \
@@ -2477,12 +2715,14 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../catalogwindow.h \
+		../../catalogscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/QPixmap \
 		../../authenticator.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QString \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QHash \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug
+		../../mainwindow.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QStackedWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstackedwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o appcontroller.o ../../appcontroller.cpp
 
 authenticator.o: ../../authenticator.cpp ../../authenticator.h \
@@ -2707,6 +2947,18 @@ biblioteca.o: ../../biblioteca.cpp ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		../../item.h \
 		../../formato.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h
@@ -2818,7 +3070,7 @@ cartaceo.o: ../../cartaceo.cpp ../../cartaceo.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cartaceo.o ../../cartaceo.cpp
 
-catalogwindow.o: ../../catalogwindow.cpp ../../catalogwindow.h \
+catalogscreen.o: ../../catalogscreen.cpp ../../catalogscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -3035,7 +3287,7 @@ catalogwindow.o: ../../catalogwindow.cpp ../../catalogwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialog.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o catalogwindow.o ../../catalogwindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o catalogscreen.o ../../catalogscreen.cpp
 
 digitale.o: ../../digitale.cpp ../../digitale.h \
 		../../formato.h \
@@ -3774,6 +4026,232 @@ item.o: ../../item.cpp ../../item.h \
 		../../formato.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o item.o ../../item.cpp
 
+itemlistscreen.o: ../../itemlistscreen.cpp ../../itemlistscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfiginclude.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationdefinitions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qassert.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtnoop.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypes.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversion.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qyieldcpu.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qforeach.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmalloc.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qminmax.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qoverload.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qswap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtresource.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttranslation.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcomparehelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpair.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20functional.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20memory.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlatin1stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qanystringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfloat16.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmath.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterable.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmargins.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q23utility.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qaction.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qicon.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsize.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrect.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpoint.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgba64.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qimage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixelformat.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtransform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpolygon.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qregion.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qspan.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20iterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qline.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvariant.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpalette.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfont.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qendian.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcursor.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbitmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qevent.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qurl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qeventpoint.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvector2d.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvectornd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpointingdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qinputdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QList \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QRect \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QSize \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QSizeF \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/QTransform \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnativeinterface.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qscreen_platform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qelapsedtimer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfuture.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfutureinterface.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmutex.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtsan_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qresultstore.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfuture_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qthreadpool.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qthread.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qexception.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpromise.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication_platform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpicture.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QTableWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtablewidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtableview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QTableWidgetItem \
+		../../item.h \
+		../../formato.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o itemlistscreen.o ../../itemlistscreen.cpp
+
 libro.o: ../../libro.cpp ../../libro.h \
 		../../item.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
@@ -3880,7 +4358,7 @@ libro.o: ../../libro.cpp ../../libro.h \
 		../../formato.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o libro.o ../../libro.cpp
 
-loginwindow.o: ../../loginwindow.cpp ../../loginwindow.h \
+loginscreen.o: ../../loginscreen.cpp ../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -4096,11 +4574,10 @@ loginwindow.o: ../../loginwindow.cpp ../../loginwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHBoxLayout
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loginwindow.o ../../loginwindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loginscreen.o ../../loginscreen.cpp
 
-main.o: ../../main.cpp ../../mainwindow.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
+main.o: ../../main.cpp ../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qapplication.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiglobal.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobal.h \
@@ -4152,22 +4629,17 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiexports.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsexports.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qwidget.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qwindowdefs.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qchar.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcomparehelpers.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20type_traits.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstring.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qchar.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringview.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearray.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydata.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpair.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydatapointer.h \
@@ -4188,91 +4660,46 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringbuilder.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter_base.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlist.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhashfunctions.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterator.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringlist.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qalgorithms.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringmatcher.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreevent.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qelapsedtimer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetatype.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevicebase.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfloat16.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmath.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qalgorithms.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterable.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetacontainer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerinfo.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringmatcher.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmargins.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/q23utility.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qaction.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qkeysequence.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qicon.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsize.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixmap.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpaintdevice.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrect.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpoint.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcolor.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgb.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgba64.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qimage.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixelformat.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtransform.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpolygon.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qregion.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qspan.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20iterator.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qline.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvariant.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpalette.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbrush.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfont.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qendian.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfontmetrics.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfontinfo.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qsizepolicy.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcursor.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbitmap.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qevent.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevice.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qurl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qeventpoint.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvector2d.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvectornd.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpointingdevice.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qinputdevice.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qscreen.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QList \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QRect \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QSize \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QSizeF \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/QTransform \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnativeinterface.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qscreen_platform.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdeadlinetimer.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qelapsedtimer.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qeventloop.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreapplication_platform.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfuture.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfutureinterface.h \
@@ -4285,11 +4712,68 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrunnable.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qexception.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpromise.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvariant.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q23utility.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpoint.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsize.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmargins.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcursor.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbitmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrect.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qrgba64.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qimage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpixelformat.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtransform.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpolygon.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qregion.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qspan.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20iterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qline.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qinputmethod.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication_platform.h \
+		../../appcontroller.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
+		../../biblioteca.h \
+		../../item.h \
+		../../formato.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../loginscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qaction.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qicon.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpalette.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfont.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qendian.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qevent.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qurl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qeventpoint.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvector2d.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qvectornd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qpointingdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qinputdevice.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QList \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QRect \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QSize \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QSizeF \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/QTransform \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qscreen_platform.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../loginwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QVBoxLayout \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qboxlayout.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qlayout.h \
@@ -4315,10 +4799,14 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../catalogwindow.h \
+		../../catalogscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/QPixmap \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QApplication \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qapplication.h
+		../../authenticator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QString \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QHash \
+		../../mainwindow.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QStackedWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstackedwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -4512,16 +5000,9 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qguiapplication_platform.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		ui_mainwindow.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVariant \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QApplication \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMenuBar \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmenubar.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmenu.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QStatusBar \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstatusbar.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QStackedWidget \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstackedwidget.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qframe.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
 mp4.o: ../../mp4.cpp ../../mp4.h \
@@ -4745,8 +5226,8 @@ moc_authenticator.o: moc_authenticator.cpp
 moc_biblioteca.o: moc_biblioteca.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_biblioteca.o moc_biblioteca.cpp
 
-moc_catalogwindow.o: moc_catalogwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_catalogwindow.o moc_catalogwindow.cpp
+moc_catalogscreen.o: moc_catalogscreen.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_catalogscreen.o moc_catalogscreen.cpp
 
 moc_formato.o: moc_formato.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_formato.o moc_formato.cpp
@@ -4754,8 +5235,11 @@ moc_formato.o: moc_formato.cpp
 moc_item.o: moc_item.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_item.o moc_item.cpp
 
-moc_loginwindow.o: moc_loginwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_loginwindow.o moc_loginwindow.cpp
+moc_itemlistscreen.o: moc_itemlistscreen.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_itemlistscreen.o moc_itemlistscreen.cpp
+
+moc_loginscreen.o: moc_loginscreen.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_loginscreen.o moc_loginscreen.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

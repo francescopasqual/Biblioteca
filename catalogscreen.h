@@ -79,9 +79,6 @@ private slots:
     void onBookButtonClicked();
     void onFilmButtonClicked();
     void onVinylButtonClicked();
-
-
-
 };
 
 #endif // CATALOGSCREEN_H

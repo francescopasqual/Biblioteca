@@ -3,24 +3,15 @@
 
 #include "item.h"
 
-class Libro : public Item
-{
-
+class Libro : public Item {
 private:
-    string autore;
     int pagine;
-    string genere;
 
 public:
-
-    Libro(string t, int an, int c, int pr, string au, int p, string g, QObject *parent = nullptr);
-
+    Libro(std::string t, std::string autore, std::string genere, int an, int c, int p, int pag, QObject* parent = nullptr);
+    std::string getTipoCreatore() const override;
     void showInfo() const override;
-
-    //getter
-    string getAutore() const;
     int getPagine() const;
-    string getGenere() const;
 };
 
 #endif // LIBRO_H
