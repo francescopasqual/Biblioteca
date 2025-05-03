@@ -2,22 +2,24 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
-QT_END_NAMESPACE
+#include <QStackedWidget> // Necessario per lo stacked widget
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
 private:
-    Ui::MainWindow *ui;
+
+    QStackedWidget* stackedWidget; // Il widget che impila le nostre schermate
+
+public:
+
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow(); // Distruttore per pulizia se necessaria
+
+    // Metodo pubblico per ottenere il puntatore allo stacked widget.
+    // Il Controller ne avrà bisogno per aggiungere e cambiare le schermate.
+    QStackedWidget* getStackedWidget() const;
+
 };
 #endif // MAINWINDOW_H

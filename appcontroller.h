@@ -3,20 +3,28 @@
 
 #include <QObject>
 #include "biblioteca.h"
-#include "loginwindow.h"
-#include "catalogwindow.h"
+#include "loginscreen.h"
+#include "catalogscreen.h"
 #include "authenticator.h"
 #include <QDebug>
+#include "mainwindow.h"
+#include <QMainWindow>
+#include <QStackedWidget>
+#include <QString>
 
 class AppController : public QObject
 {
     Q_OBJECT
 
 private:
-    Biblioteca* Model;
-    LoginWindow* loginView;
-    CatalogWindow* catalogView;
+
+    MainWindow* mainWindow;
+    QStackedWidget* stackedWidget;
+    Biblioteca* bibliotecaModel;
     Authenticator* authenticator;
+    LoginScreen* loginScreen;;
+    CatalogScreen* catalogScreen;
+
 
 
 public:

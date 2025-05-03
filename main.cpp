@@ -1,17 +1,14 @@
-#include "mainwindow.h"
-#include "loginwindow.h"
-#include "catalogwindow.h"
-#include "appcontroller.h"
-
+// main.cpp
 #include <QApplication>
+#include "appcontroller.h" // Il nostro Controller principale
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication a(argc, argv); // Inizializza l'applicazione Qt
 
-    AppController controller;
-    controller.start();
+    AppController controller; // Crea l'istanza del Controller.
 
+    controller.start(); // Dici al Controller di avviare l'applicazione.
 
-    return a.exec();
+    return a.exec(); // Avvia il ciclo di eventi Qt.
 }

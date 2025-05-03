@@ -13,7 +13,7 @@ SOURCES += \
     authenticator.cpp \
     biblioteca.cpp \
     cartaceo.cpp \
-    catalogwindow.cpp \
+    catalogscreen.cpp \
     digitale.cpp \
     disco.cpp \
     epub.cpp \
@@ -22,7 +22,7 @@ SOURCES += \
     formato.cpp \
     item.cpp \
     libro.cpp \
-    loginwindow.cpp \
+    loginscreen.cpp \
     main.cpp \
     mainwindow.cpp \
     mp4.cpp \
@@ -33,7 +33,7 @@ HEADERS += \
     authenticator.h \
     biblioteca.h \
     cartaceo.h \
-    catalogwindow.h \
+    catalogscreen.h \
     digitale.h \
     disco.h \
     epub.h \
@@ -42,7 +42,7 @@ HEADERS += \
     formato.h \
     item.h \
     libro.h \
-    loginwindow.h \
+    loginscreen.h \
     mainwindow.h \
     mp4.h \
     vinile.h
