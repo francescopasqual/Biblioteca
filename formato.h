@@ -9,7 +9,8 @@ class Formato : public QObject
     Q_OBJECT
 
 public:
-    explicit Formato(QObject *parent = nullptr);
+
+    Formato(QObject *parent = nullptr);
     virtual ~Formato() = default;
     virtual std::string descrizione() const = 0;
 

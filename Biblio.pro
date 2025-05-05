@@ -21,6 +21,7 @@ SOURCES += \
     fisico.cpp \
     formato.cpp \
     item.cpp \
+    itemdetailscreen.cpp \
     itemlistscreen.cpp \
     libro.cpp \
     loginscreen.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     fisico.h \
     formato.h \
     item.h \
+    itemdetailscreen.h \
     itemlistscreen.h \
     libro.h \
     loginscreen.h \

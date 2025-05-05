@@ -13,7 +13,7 @@ ItemListScreen::ItemListScreen(QWidget *parent)
     upperSectionLayout = new QHBoxLayout(upperSectionWidget);
     backButton = new QPushButton("Indietro", upperSectionWidget);
     upperSectionLayout->addWidget(backButton,0,Qt::AlignLeft);
-    landingLabel = new QLabel("Risultati per la ricerca", upperSectionWidget);
+    landingLabel = new QLabel(upperSectionWidget);
     landingLabel->setAlignment(Qt::AlignCenter); // Centra il testo nella label
     QFont titleFont = landingLabel->font();
     titleFont.setPointSize(titleFont.pointSize() + 4); // Aumenta la dimensione del font
@@ -86,12 +86,12 @@ void ItemListScreen::toInsertItems(const std::vector<Item*>& items, const QStrin
 
     // Pulisce il contenuto attuale della tabella
     itemTable->clear(); // Pulisce la tabella
-    itemTable->setRowCount(0); // Resetta il numero di righe
+    itemTable->setRowCount(0); // Resetta il conteggio del numero di righe
 
     // Popola la tabella con gli item forniti
     itemTable->setRowCount(items.size()); // Imposta il numero di righe in base agli item
 
-    for (unsigned int i = 0; i < items.size(); ++i) {
+    for (size_t i = 0; i < items.size(); ++i) {
         Item* currentItem = items[i];
 
         // Crea gli item per ogni cella della riga corrente
@@ -103,12 +103,14 @@ void ItemListScreen::toInsertItems(const std::vector<Item*>& items, const QStrin
         titleItem->setData(Qt::UserRole, QVariant::fromValue<Item*>(currentItem));
         creatorItem->setData(Qt::UserRole, QVariant::fromValue<Item*>(currentItem));
         yearItem->setData(Qt::UserRole, QVariant::fromValue<Item*>(currentItem));
-        // Imposta le proprietà di stile per gli item
-        titleItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable); // Solo selezionabile
-        creatorItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable); // Solo selezionabile
-        yearItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable); // Solo selezionabile
 
-        // Imposta gli item nelle celle corrispondenti
+        // Proprietà item: attivo e solo selezionabile
+        titleItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        creatorItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        yearItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+        // Inserire Iteme nella tabella: ciascuno nella cella corrispondente
+        // "i" indica la riga della tabella; "0", "1", "2" indicano le celle (colonne)
         itemTable->setItem(i, 0, titleItem);
         itemTable->setItem(i, 1, creatorItem);
         itemTable->setItem(i, 2, yearItem);

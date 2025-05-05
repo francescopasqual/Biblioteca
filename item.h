@@ -28,7 +28,7 @@ public:
     virtual ~Item();
 
     // Metodi virtuali puri per obbligare le sottoclassi a implementarli
-    virtual std::string getTipoCreatore() const = 0;  // Es: "Autore", "Regista"
+    virtual std::string getTipoCreatore() const = 0;  // "Autore", "Regista", "Performer"
     virtual void showInfo() const;
 
     // Getter (implementati in Item.cpp)

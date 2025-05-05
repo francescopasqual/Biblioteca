@@ -56,7 +56,7 @@ private:
 public:
 
     CatalogScreen(QWidget *parent = nullptr);
-    ~CatalogScreen();
+    ~CatalogScreen() = default;
 
     // Mostra un messaggio di errore
     void showErrorMessage(const QString &message);

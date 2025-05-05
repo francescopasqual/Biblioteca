@@ -40,7 +40,7 @@ public:
 
     LoginScreen(QWidget *parent = nullptr);
 
-    ~LoginScreen();
+    ~LoginScreen() = default;
 
     void showErrorMessage(const QString& message);
 

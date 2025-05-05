@@ -38,11 +38,13 @@ private:
 
 
 public:
-    explicit ItemListScreen(QWidget *parent = nullptr);
-    ~ItemListScreen();
+
+    ItemListScreen(QWidget *parent = nullptr);
+    ~ItemListScreen() = default;
 
     // Metodo pubblico che il Controller chiamerà per passare i dati e il testo del titolo
     void toInsertItems(const std::vector<Item*>& items, const QString& searchTermOrCategory);
+
 
 signals:
     // Segnale emesso quando l'utente seleziona un item dalla tabella
@@ -53,11 +55,13 @@ signals:
 
 
 private slots:
+
     // Slot che gestisce il clic su un item della tabella
-    // La firma deve corrispondere al segnale QTableWidget::itemClicked
-    void onItemClicked(QTableWidgetItem* item); // La firma deve includere QTableWidgetItem*
+    //Dal clic vorrrò arrivare in una finestra di visualizzazione dettagliata per quel particolare item
+    void onItemClicked(QTableWidgetItem* item);
 
     // Slot che gestisce il clic sul bottone Indietro
+    //Dal clic vorrò tornare nella CatalogScreen
     void onBackButtonClicked(); // Nuovo slot per il bottone Indietro
 
 };

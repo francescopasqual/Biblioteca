@@ -5,9 +5,14 @@
 
 class Mp4 : public Digitale
 {
+    Q_OBJECT // Aggiungi Q_OBJECT
+
+private:
+    int durata;
 public:
-    Mp4(int s, QObject *parent = nullptr);
-    std::string descrizione() const override;
+    explicit Mp4(int s, int d, QObject *parent = nullptr);
+    std::string descrizione() const override; // Implementazione in Mp4
+    int getDurata() const;
 };
 
 #endif // MP4_H

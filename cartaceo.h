@@ -2,12 +2,20 @@
 #define CARTACEO_H
 
 #include "fisico.h"
+#include <string>
 
 class Cartaceo : public Fisico
 {
+    Q_OBJECT
+
+private:
+    std::string isbn;
+
 public:
-    Cartaceo(QObject *parent = nullptr);
+    explicit Cartaceo(std::string isbn, QObject *parent = nullptr);
     std::string descrizione() const override;
+
+    std::string getIsbn() const;
 
 };
 

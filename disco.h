@@ -5,13 +5,16 @@
 
 class Disco : public Fisico
 {
+
+private:
+    int durata;
+
 public:
 
     Disco(int d, QObject *parent = nullptr);
     std::string descrizione() const override;
 
-private:
-    int durata;
+    int getDurata() const;
 };
 
 #endif // DISCO_H
