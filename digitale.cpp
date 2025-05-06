@@ -1,9 +1,20 @@
 #include "digitale.h"
+#include <QDebug>
 
-Digitale::Digitale(int s, QObject *parent) : Formato{parent}, sizeMB(s) {}
+Digitale::Digitale(unsigned int s, QObject *parent) : Formato(parent), sizeMB(s) {
+    qDebug() << "Chiamato costruttore di Digitale con sizeMB:" << s;
+}
 
-// Implementazione del getter per sizeMB
-int Digitale::getSizeMB() const {
+Digitale::~Digitale() {
+    qDebug() << "Chiamato distruttore di Digitale";
+}
+
+unsigned int Digitale::getSizeMB() const {
+    qDebug() << "Chiamato getSizeMB() in Digitale";
     return sizeMB;
 }
 
+bool Digitale::richiedeConnessione() const {
+    qDebug() << "Chiamato richiedeConnessione() in Digitale";
+    return false; // Di default, non richiede connessione (sovrascrivibile nelle classi derivate)
+}

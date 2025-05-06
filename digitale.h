@@ -2,25 +2,27 @@
 #define DIGITALE_H
 
 #include "formato.h"
+#include <string>
 
 class Digitale : public Formato
 {
-    Q_OBJECT // Aggiungi Q_OBJECT
+    Q_OBJECT
 
 private:
-    int sizeMB;
+    unsigned int sizeMB;
 
 public:
-    explicit Digitale(int s=0, QObject *parent = nullptr);
-    virtual ~Digitale() = default;
+    explicit Digitale(unsigned int s = 0, QObject *parent = nullptr);
+    virtual ~Digitale() override;
 
-    // Dichiara descrizione come pura virtuale qui per renderla astratta
-    virtual std::string descrizione() const override = 0; // PURA VIRTUALE
+    // Mantiene descrizione come virtuale pura
+    std::string descrizione() const override = 0;
 
-    // Getter per sizeMB (necessario per Epub/Mp4)
-    int getSizeMB() const;
+    // Getter per sizeMB
+    unsigned int getSizeMB() const;
 
-
+    // Aggiunta funzionalità comune ai formati digitali
+    virtual bool richiedeConnessione() const;
 };
 
 #endif // DIGITALE_H

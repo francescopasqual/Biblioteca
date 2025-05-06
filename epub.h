@@ -7,12 +7,16 @@
 
 class Epub : public Digitale
 {
-    Q_OBJECT // Aggiungi Q_OBJECT
+    Q_OBJECT
 
 public:
+    explicit Epub(unsigned int sizeMB, QObject *parent = nullptr);
+    ~Epub() override;
 
-    explicit Epub(int s, QObject *parent = nullptr);
-    std::string descrizione() const override; // Implementazione in Epub
+    std::string descrizione() const override;
+
+    // Override per la funzionalità specifica di Epub
+    bool richiedeConnessione() const override;
 };
 
 #endif // EPUB_H

@@ -2,11 +2,11 @@
 #include <string> // Per std::to_string
 
 
-Mp4::Mp4(int s, int d, QObject *parent) : Digitale(s, parent), durata(d) {
+Mp4::Mp4(unsigned int s, unsigned int d, QObject *parent) : Digitale(s, parent), durata(d) {
     qDebug() << "Chiamato costruttore di Mp4";
 }
 
-int Mp4::getDurata() const
+unsigned int Mp4::getDurata() const
 {
     qDebug() << "Chiamato getDurata() in Mp4";
     return durata;

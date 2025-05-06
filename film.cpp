@@ -1,17 +1,18 @@
 #include "film.h"
 #include <iostream>
 
-// Costruttore
-Film::Film(const string& id, const string& t, const string& regista, const string& genere, const string& an,
-           unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int d, const string& ap, QObject* parent)
-    // Chiama il costruttore della classe base Item
-    : Item(id, t, regista, genere, an, c, p, formati, parent),
-    durata(d),
-    attore_principale(ap)
-{}
+//Costruttore
+Film::Film(const string &id, const string &t, const string &cr, unsigned int an, const string &g, unsigned int c,
+           unsigned int p, unsigned int dur, const string &attore, QObject *parent)
+    : Item(id, t, cr, an, g, c, p, parent),
+      durata(dur),
+      attore_principale(attore)
+{
+    //il vettore dei formati viene creato vuoto di default
+}
 
 // Implementazione dei getter
-int Film::getDurata() const
+unsigned int Film::getDurata() const
 {
     return durata;
 }

@@ -9,17 +9,16 @@
 #include "libro.h"
 #include "film.h"
 #include "vinile.h"
+#include "itemfactory.h"
 
 class Biblioteca : public QObject
 {
     Q_OBJECT
 
 private:
-
     std::vector<Item*> catalogo;
 
 public:
-
     // Costruttore e distruttore
     Biblioteca(QObject *parent = nullptr);
     ~Biblioteca();
@@ -35,10 +34,24 @@ public:
     std::vector<Item*> searchByGenre(const string& genere) const;
     std::vector<Item*> searchByCreator(const string& creatore) const;
 
-
     // Funzioni di prestito
     bool prestaItem(Item* item);
     bool restituisciItem(Item* item);
+
+    // Nuovo metodo che utilizza la factory per creare e aggiungere un item
+    Item* createAndAddItem(
+        ItemType type,
+        const string& id,
+        const string& titolo,
+        const string& creatore,
+        unsigned int anno,
+        const string& genere,
+        unsigned int copie,
+        const ItemSpecificParams& specificParams,
+        const std::vector<Formato*>& formati = {}
+        );
+
+
 
 signals:
     void itemAdded(Item* item);

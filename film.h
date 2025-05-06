@@ -5,19 +5,19 @@
 
 class Film : public Item {
 private:
-    int durata; // in minuti
+    unsigned int durata; // in minuti
     string attore_principale;
 
 public:
     // Costruttore
-    Film(const string& id, const string& t, const string& regista, const string& genere, const string& an,
-         unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int d, const string& ap, QObject* parent = nullptr);
+    Film(const string &id, const string &t, const string &cr, unsigned int an, const string &g, unsigned int c,
+         unsigned int p, unsigned int dur, const string &attore, QObject *parent = nullptr);
 
     // Override dei metodi virtuali
     void showInfo() const override;
 
     // Metodi specifici della classe Film
-    int getDurata() const;
+    unsigned int getDurata() const;
     string getAttore_principale() const;
 };
 

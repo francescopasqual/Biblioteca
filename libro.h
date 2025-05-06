@@ -9,8 +9,8 @@ private:
 
 public:
     // Costruttore
-    Libro(const string& id, const string& t, const string& autore, const string& genere, const string& an,
-          unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int pag, QObject* parent = nullptr);
+    Libro(const string& id, const string& t, const string& cr, unsigned int an, const string& g, unsigned int c,
+            unsigned int p, int pag, QObject* parent = nullptr);
 
     void showInfo() const override;
 

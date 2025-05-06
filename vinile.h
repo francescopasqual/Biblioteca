@@ -7,19 +7,20 @@
 
 class Vinile : public Item {
 private:
-    int numeroTracce;
-    int durataTotale;
+    unsigned int numeroTracce;
+    unsigned int durataTotale;
 
 public:
     // Costruttore
-    Vinile(const string& id, const string& t, const string& performer, const string& genere, const string& an,
-           unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int nt, int dt, QObject* parent = nullptr);
+    Vinile(const string &id, const string &t, const string &cr, unsigned int an, const string &g, unsigned int c,
+           unsigned int p, unsigned int numTracce, unsigned int durTotale, QObject *parent = nullptr);
+
 
     void showInfo() const override;
 
     // Metodi specifici della classe Vinile
-    int getNumeroTracce() const;
-    int getDurataTotale() const;
+    unsigned int getNumeroTracce() const;
+    unsigned int getDurataTotale() const;
 };
 
 #endif // VINILE_H

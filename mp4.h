@@ -7,14 +7,20 @@
 
 class Mp4 : public Digitale
 {
-    Q_OBJECT // Aggiungi Q_OBJECT
+    Q_OBJECT
 
 private:
-    int durata;
+    unsigned int durata;
+
 public:
-    explicit Mp4(int s, int d, QObject *parent = nullptr);
-    std::string descrizione() const override; // Implementazione in Mp4
-    int getDurata() const;
+    explicit Mp4(unsigned int sizeMB, unsigned int durata, QObject *parent = nullptr);
+    ~Mp4() override;
+
+    std::string descrizione() const override;
+    unsigned int getDurata() const;
+
+    // Override per la funzionalità specifica di Mp4
+    bool richiedeConnessione() const override;
 };
 
 #endif // MP4_H

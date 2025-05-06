@@ -7,16 +7,17 @@
 
 class Disco : public Fisico
 {
+    Q_OBJECT
 
 private:
-    int durata;
+    unsigned int durata;
 
 public:
+    explicit Disco(unsigned int durata, QObject *parent = nullptr);
+    ~Disco() override;
 
-    Disco(int d, QObject *parent = nullptr);
     std::string descrizione() const override;
-
-    int getDurata() const;
+    unsigned int getDurata() const;
 };
 
 #endif // DISCO_H

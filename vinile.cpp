@@ -2,21 +2,22 @@
 #include <iostream>
 
 // Costruttore
-Vinile::Vinile(const string& id, const string& t, const string& performer, const string& genere, const string& an,
-               unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int nt, int dt, QObject* parent)
-    // Chiama il costruttore della classe base Item
-    : Item(id, t, performer, genere, an, c, p, formati, parent),
-    numeroTracce(nt),
-    durataTotale(dt)
-{}
+Vinile::Vinile(const string &id, const string &t, const string &cr, unsigned int an, const string &g, unsigned int c,
+               unsigned int p, unsigned int numTracce, unsigned int durTotale, QObject *parent)
+    : Item(id, t, cr, an, g, c, p, parent),
+      numeroTracce(numTracce),
+      durataTotale(durTotale)
+{
+    //il vettore dei formati viene creato vuoto di default
+}
 
 // Implementazione dei getter
-int Vinile::getNumeroTracce() const
+unsigned int Vinile::getNumeroTracce() const
 {
     return numeroTracce;
 }
 
-int Vinile::getDurataTotale() const
+unsigned int Vinile::getDurataTotale() const
 {
     return durataTotale;
 }

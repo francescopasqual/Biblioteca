@@ -133,3 +133,19 @@ bool Biblioteca::restituisciItem(Item *item)
     qDebug() << "L'item '" << QString::fromStdString((*it)->getTitolo()) << "' non risulta in prestito.";
     return false;
 }
+
+Item *Biblioteca::createAndAddItem(ItemType type, const string &id, const string &titolo, const string &creatore, unsigned int anno, const string &genere, unsigned int copie, const ItemSpecificParams &specificParams, const std::vector<Formato *> &formati)
+{
+    try {
+        // Creiamo l'item usando la factory (con 0 prestiti iniziali)
+        Item* item = ItemFactory::createItem( type, id, titolo, creatore, anno, genere, copie, 0, specificParams, formati);
+
+        // Lo aggiungiamo al catalogo
+        addItem(item);
+        return item;
+
+    } catch (const std::exception& e) {
+        qWarning() << "Errore nella creazione dell'item:" << e.what();
+        return nullptr;
+    }
+}
