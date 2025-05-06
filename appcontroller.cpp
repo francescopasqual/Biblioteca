@@ -10,13 +10,45 @@ void AppController::navigateBack()
         //imposto la nuova finestra (che ora è l'ultimo elemento del vettore)
         stackedWidget->setCurrentWidget(navigationStack.back());
     } else {
-    // Questo caso si verifica se siamo nella schermata iniziale (pila ha 1 elemento)
-    // o se la pila è vuota (problema logico grave).
-    qWarning() << "AppController: Pila di navigazione insufficiente. Impossibile tornare indietro.";
-    // Puoi decidere di rimanere nella schermata attuale, mostrare un messaggio, ecc.
-    // Per ora, non facciamo nulla (rimane nella schermata attuale).
+        qWarning() << "AppController: Pila di navigazione insufficiente. Impossibile tornare indietro.";
+        // Per ora non lo gestisco
+    }
 }
+
+
+// --- Gestione dei risultati della ricerca per categoria ---
+// 0 risultati -> messaggio di errore su CatalogScreen
+// 1 risultato -> mostra ItemDetailScreen con l'item
+// >1 risultati -> mostra ItemListScreen con i risultati
+void AppController::operateOnSearchResults(const std::vector<Item *> &results, const QString &query)
+{
+    qDebug() << "AppController: Operazione sui risultati della ricerca. Risultati trovati:" << results.size();
+
+    // Se non ci sono risultati, mostra un messaggio di errore
+    if (results.empty()) {
+        qDebug() << "AppController: Nessun risultato trovato per la query:" << query;
+        catalogScreen->showErrorMessage("Nessun risultato trovato per la query: '" + query + "'.");
+        return;
+    }
+
+    // Se c'è un solo risultato, mostra i dettagli dell'item
+    if (results.size() == 1) {
+        qDebug() << "AppController: Un solo risultato trovato. Mostrando dettagli.";
+        handleItemListClicked(results[0]); // Passa il puntatore all'item alla funzione di gestione dei dettagli
+        return;
+    }
+
+    // Se ci sono più risultati, mostra la lista degli item
+    qDebug() << "AppController: Più di un risultato trovato. Mostrando lista.";
+    listScreen->toInsertItems(results, query); // Passa il vettore di risultati alla ItemListScreen
+    stackedWidget->setCurrentWidget(listScreen); // Mostra la schermata della lista
 }
+
+
+
+
+
+
 
 AppController::AppController(QObject *parent)
     : QObject{parent}
@@ -27,6 +59,38 @@ AppController::AppController(QObject *parent)
 
     //Istanze del modello
     bibliotecaModel = new Biblioteca(this);
+
+    // --- Popolare la Biblioteca con dati di test ---
+    qDebug() << "AppController: Popolando la biblioteca con dati di test...";
+
+    // Esempio: Aggiungi un Libro
+    Libro* libro1 = new Libro("Il Signore degli Anelli", "J.R.R. Tolkien", "Fantasy", 1954, 5, 2, 500, this); // Parent è AppController
+    libro1->addFormato(new Cartaceo("978-8845292613", libro1)); // Parent è il libro
+    libro1->addFormato(new Epub(15, libro1)); // Parent è il libro
+    bibliotecaModel->addItem(libro1);
+    // Esempio: Aggiungi un altro Libro
+    Libro* libro2 = new Libro("1984", "George Orwell", "Dystopian", 1949, 2, 1, 300, this); // Parent è AppController
+    libro2->addFormato(new Cartaceo("978-0451524935", libro2)); // Parent è il libro
+    libro2->addFormato(new Epub(10, libro2)); // Parent è il libro
+    bibliotecaModel->addItem(libro2);
+
+    // Esempio: Aggiungi un Film
+    Film* film1 = new Film("Inception", "Christopher Nolan", "Sci-Fi", 2010, 3, 1, 120, "Stocazzo", this); // Parent AppController
+    film1->addFormato(new Disco(148, film1)); // Parent il film
+    film1->addFormato(new Mp4(2000, 148, film1)); // Parent il film
+    bibliotecaModel->addItem(film1);
+
+    // Esempio: Aggiungi un Vinile
+    Vinile* vinile1 = new Vinile("Kind of Blue", "Miles Davis", "Jazz", 1959, 2, 0, 5, 55, this); // Parent AppController
+    vinile1->addFormato(new Disco(45, vinile1)); // Un vinile può essere considerato un tipo di disco fisico
+    bibliotecaModel->addItem(vinile1);
+
+    // Aggiungi altri item di test con diversi formati, disponibilità, ecc.
+    // Assicurati che i costruttori delle tue classi Item e Formato accettino un QObject* parent.
+
+    qDebug() << "AppController: Popolazione dati di test completata. Items nel catalogo:" << bibliotecaModel->getCatalogo().size();
+    // --- Fine popolamento dati di test ---
+
     authenticator = new Authenticator(this);
 
     //Istanze delle schermate
@@ -70,7 +134,6 @@ AppController::~AppController() {delete mainWindow;}
 
 
 
-
 void AppController::start()
 {
     // Mostra la Main Window di partenza, principale.
@@ -99,11 +162,7 @@ void AppController::handleLoginRequest(const QString &username, const QString &p
 
 
 
-// --- Gestione dei risultati della ricerca per categoria ---
-// La logica è identica a quella della ricerca globale:
-// 0 risultati -> messaggio di errore su CatalogScreen
-// 1 risultato -> mostra ItemDetailScreen con l'item
-// >1 risultati -> mostra ItemListScreen con i risultati
+
 
 void AppController::handleGlobalSearch(const QString &query)
 {
@@ -127,11 +186,7 @@ void AppController::handleGlobalSearch(const QString &query)
     for(Item* item : performerResults) uniqueCreatorResults.insert(item);
     resultsByCreator.assign(uniqueCreatorResults.begin(), uniqueCreatorResults.end()); // Copia nel vettore
 
-    / Mostra un messaggio di errore all'utente
-        QMessageBox::warning(stackedWidget->currentWidget(),
-                                                                       "Restituzione Non Riuscita",
-                                                                       "Impossibile registrare la restituzione per '" + QString::fromStdString(item->getTitolo()) +
-                                                                           "'. Possibile errore server. Riprovare più tardi.");
+
     // Ricerca per Anno (solo se la query è un numero valido)
     std::vector<Item*> resultsByYear;
     bool isNumber = false;
@@ -153,32 +208,8 @@ void AppController::handleGlobalSearch(const QString &query)
     std::vector<Item*> finalResults(finalUniqueResults.begin(), finalUniqueResults.end());
 
     //GESTIONE DEI RISULTATI DELLA RICERCA
-
-    // Se la ricerca non ha prodotto risultati
-    if(finalResults.empty()){
-        qDebug() << "AppController: Nessun risultato trovato per la ricerca globale.";
-        // Mostra un messaggio di errore sulla schermata di catalogo (da cui è partita la ricerca)
-        catalogScreen->showErrorMessage("Nessun risultato trovato per '" + query + "'.");
-
-    }
-    // Altrimenti, se contiene un solo item
-    else if(finalResults.size()==1){
-        qDebug() << "AppController: Un risultato (" << QString::fromStdString(finalResults[0]->getTitolo()) << ") trovato per la ricerca globale. Mostrando dettagli.";
-        // Ottieni il puntatore all'unico item trovato
-        Item* foundItem = finalResults[0];
-        navigationStack.push_back(stackedWidget->currentWidget()); //aggiorno la pila per memorizzare la finestra corrente
-        detailScreen->displayDetails(foundItem); // Passa l'item alla schermata di dettaglio
-        stackedWidget->setCurrentWidget(detailScreen); // mostro (passo) alla finestra di dettaglio
-
-    }
-    // Altrimenti (se contiene più item)
-    else{
-        qDebug() << "AppController: Più risultati (" << finalResults.size() << ") trovati per la ricerca globale. Mostrando lista.";
-        // Chiama il metodo della ItemListScreen per popolare la tabella con i risultati
-        navigationStack.push_back(stackedWidget->currentWidget()); //memorizzo nella pila la finestra corrente
-        listScreen->toInsertItems(finalResults, "Risultati per '" + query + "'");
-        stackedWidget->setCurrentWidget(listScreen); // Mostra la schermata della lista
-    }
+    // Chiama la funzione helper per gestire i risultati della ricerca
+    operateOnSearchResults(finalResults, "Risultati per '" + query + "'"); // <<< Passa il titolo della ricerca globale
 }
 
 
@@ -202,7 +233,7 @@ void AppController::handleCategorySelected(const QString &categoryName)
             }
         }
 
-    //Film
+        //Film
     }else if(categoryName == "Film"){
         qDebug() << "AppController: Filtrando per tipo: Film.";
         for(Item* item : allItems) {
@@ -211,7 +242,7 @@ void AppController::handleCategorySelected(const QString &categoryName)
             }
         }
 
-    //Vinili
+        //Vinili
     }else if (categoryName == "Vinili"){
         qDebug() << "AppController: Filtrando per tipo: Vinile.";
         for(Item* item : allItems) {
@@ -229,27 +260,8 @@ void AppController::handleCategorySelected(const QString &categoryName)
 
 
     //Gestione dei risultati filtrati
-    if(filteredItems.empty()){
-        qDebug() << "AppController: Nessun item trovato nella categoria:" << categoryName;
-        catalogScreen->showErrorMessage("Nessun articolo trovato nella categoria '" + categoryName + "'.");
-
-    }
-    // Se c'è esattamente un item del tipo filtrato (poco probabile se ci sono molti item, ma possibile)
-    else if(filteredItems.size()==1){
-        qDebug() << "AppController: Un solo item trovato nella categoria:" << categoryName << ". Mostrando dettagli.";
-        Item* foundItem = filteredItems[0];
-        navigationStack.push_back(stackedWidget->currentWidget()); //aggiorno la pila per memorizzare la finestra corrente
-        detailScreen->displayDetails(foundItem);
-        stackedWidget->setCurrentWidget(detailScreen); // Mostra la schermata di dettaglio
-
-    }
-    // Altrimenti (più di un item del tipo filtrato)
-    else{
-        qDebug() << "AppController: Trovati (" << filteredItems.size() << ") item nella categoria:" << categoryName << ". Mostrando lista.";
-        navigationStack.push_back(stackedWidget->currentWidget()); //memorizzo nella pila la finestra corrente
-        listScreen->toInsertItems(filteredItems, "Articoli nella categoria '" + categoryName + "'"); // Passa i risultati filtrati e il titolo
-        stackedWidget->setCurrentWidget(listScreen); // Mostra la schermata della lista
-    }
+    // Chiama la funzione helper per gestire i risultati della ricerca
+    operateOnSearchResults(filteredItems, "Risultati per categoria: '" + categoryName + "'"); // <<< Passa il titolo della ricerca per categoria
 }
 
 
@@ -316,7 +328,7 @@ void AppController::handleLoanRequest(Item *item)
         QMessageBox::warning(stackedWidget->currentWidget(),
                              "Prestito Non Riuscito",
                              "Impossibile registrare il prestito per '" + QString::fromStdString(item->getTitolo()) +
-                             "'. L'articolo potrebbe non essere disponibile.");
+                                 "'. L'articolo potrebbe non essere disponibile.");
     }
 }
 
@@ -352,7 +364,7 @@ void AppController::handleKeepRequest(Item *item)
         QMessageBox::warning(stackedWidget->currentWidget(),
                              "Restituzione Non Riuscita",
                              "Impossibile registrare la restituzione per '" + QString::fromStdString(item->getTitolo()) +
-                             "'. Possibile errore: l'articolo non risulta in prestito."); // Messaggio più specifico
+                                 "'. Possibile errore: l'articolo non risulta in prestito."); // Messaggio più specifico
     }
 }
 
@@ -366,9 +378,4 @@ void AppController::handleExitDetailsRequest()
     // Chiama la funzione helper per gestire la navigazione indietro generale
     navigateBack();
 }
-
-
-
-
-
 

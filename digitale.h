@@ -11,7 +11,7 @@ private:
     int sizeMB;
 
 public:
-    explicit Digitale(int s, QObject *parent = nullptr);
+    explicit Digitale(int s=0, QObject *parent = nullptr);
     virtual ~Digitale() = default;
 
     // Dichiara descrizione come pura virtuale qui per renderla astratta

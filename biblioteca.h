@@ -5,6 +5,7 @@
 #include <vector>
 #include "item.h"
 #include <QDebug>
+#include <QDebug>
 
 class Biblioteca : public QObject
 {

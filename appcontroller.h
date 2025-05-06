@@ -23,6 +23,10 @@
 #include "libro.h"
 #include "film.h"
 #include "vinile.h"
+#include "disco.h"
+#include "mp4.h"
+#include "epub.h"
+#include "cartaceo.h"
 
 class AppController : public QObject
 {
@@ -52,7 +56,7 @@ private:
     void navigateBack();
 
     //funzione helper per gestione dei risultati di una ricerca e passaggio di schermate
-
+    void operateOnSearchResults(const std::vector<Item*>& results, const QString& query);
 
 
 public:

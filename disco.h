@@ -2,6 +2,8 @@
 #define DISCO_H
 
 #include "fisico.h"
+#include <string>
+#include <QDebug>
 
 class Disco : public Fisico
 {

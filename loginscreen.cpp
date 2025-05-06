@@ -74,12 +74,6 @@ LoginScreen::LoginScreen(QWidget *parent) : QWidget(parent)
 }
 
 
-LoginScreen::~LoginScreen()
-{
-    /*Se la parentela è imposta cLIorrettamente nel costruttore
-     * Qt dealloca automaticamente gli oggetti quando LoginScreen viene distrutta
-     */
-}
 
 
 void LoginScreen::onLoginButtonClicked()

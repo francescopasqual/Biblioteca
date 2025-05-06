@@ -118,10 +118,6 @@ CatalogScreen::CatalogScreen(QWidget *parent)
     connect(vinylButton, &QPushButton::clicked, this, &CatalogScreen::onVinylButtonClicked);
 }
 
-CatalogScreen::~CatalogScreen()
-{
-
-}
 
 void CatalogScreen::showErrorMessage(const QString& message)
 {

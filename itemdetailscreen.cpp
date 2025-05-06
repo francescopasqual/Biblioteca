@@ -1,19 +1,38 @@
 #include "itemdetailscreen.h"
 
+// In itemdetailscreen.cpp
+
 void ItemDetailScreen::clearFormatsLayout()
 {
-    QLayoutItem* currentElement;
-    // Itera su tutti gli elementi nel layout (widget, layout nidificati, stretch)
-    // Usiamo takeAt(0) e iteriamo finché il layout non è vuoto
+    QLayoutItem* itemToTake;
+    // Raccogli i widget da cancellare (quelli che non sono formatsTitle)
+    std::vector<QWidget*> widgetsToDelete;
 
-    while ((currentElement = formatsLayout->takeAt(0)) != nullptr) {
-        // Se l'elemento del layout contiene un widget, lo cancelliamo
-        if (currentElement->widget()) {
-            delete currentElement->widget();
+    // Rimuovi TUTTI i layout item dal layout formatsLayout.
+    // takeAt(0) rimuove sempre il primo elemento.
+    // Iteriamo finché il layout non è vuoto prendendo l'elemento in posizione 0.
+    while((itemToTake = formatsLayout->takeAt(0)) != nullptr) {
+        // Se l'elemento del layout contiene un widget...
+        if(itemToTake->widget()) {
+            // ... e se quel widget *non* è formatsTitle (lo identifichiamo per objectName)
+            if(itemToTake->widget()->objectName() != "FormatsTitleLabel") {
+                // È un widget dinamico, aggiungilo alla lista di quelli da cancellare
+                widgetsToDelete.push_back(itemToTake->widget());
+            }
+            // Il QLayoutItem che conteneva il widget (statico o dinamico) deve sempre essere cancellato.
         }
-        // Cancelliamo l'elemento del layout stesso
-        delete currentElement; // Questo dealloca l'oggetto QLayoutItem
+        // Cancella il QLayoutItem stesso (che sia un widget o uno stretch)
+        delete itemToTake;
     }
+
+    // Ora dealloca tutti i widget dinamici che abbiamo raccolto
+    for(QWidget* w : widgetsToDelete) {
+        delete w;
+    }
+
+    // A questo punto, formatsLayout è completamente vuoto.
+    // formatsTitle (la label statica) non è stato cancellato, ma è stato rimosso dal layout.
+    // Sarà riaggiunto in displayDetails()
 }
 
 
@@ -67,7 +86,10 @@ ItemDetailScreen::ItemDetailScreen(QWidget *parent)
     formatsLayout->setAlignment(Qt::AlignTop); // Allinea il layout in alto
 
     formatsTitle = new QLabel("Formati Disponibili:", formatsWidget);
-    formatsLayout->addWidget(formatsTitle);
+    formatsTitle->setObjectName("FormatsTitleLabel"); // Imposta un nome per identificare il widget //debugging
+    //formatsTitle verrà aggiunto al layout da displayDetails
+    //altrimenti quando chiamo clearFormatsLayout crasha (perché non è più nel layout)
+    //infatti clearFormatsLayout() rimuove tutti i widget dal layout e displayDetails() tenterebbe di usarlo
     //label dinamiche create in displayDetails
 
     itemLayout->addWidget(detailsWidget);
@@ -115,6 +137,7 @@ void ItemDetailScreen::displayDetails(Item *item)
 
         clearFormatsLayout();
 
+        //RIAGGIUNGERE GLI ELEMENTI STATICI RIMOSSI DA clearFormatsLayout()
         // Aggiungi la label statica del titolo della sezione formati (rimossa da clearFormatsLayout)
         formatsLayout->addWidget(formatsTitle);
 
@@ -129,7 +152,7 @@ void ItemDetailScreen::displayDetails(Item *item)
 
         // Disabilita i pulsanti di azione che richiedono un item valido
         loanButton->setEnabled(false);
-        keepButton->setEnabled(false); // Usa il nome del pulsante corretto (returnButton)
+        keepButton->setEnabled(false);
 
         qDebug() << "ItemDetailScreen::displayDetails: Item* ricevuto nullo. Schermata resettata.";
 
@@ -158,8 +181,7 @@ void ItemDetailScreen::displayDetails(Item *item)
 
     //POPOLO LA SEZIONE DEI FORMATI
     clearFormatsLayout(); //pulizia
-
-    formatsLayout->addWidget(formatsTitle);
+    formatsLayout->addWidget(formatsTitle); //aggiungo la label statica
 
     std::vector<Formato*> formati = item->getFormati(); //formati di item
 

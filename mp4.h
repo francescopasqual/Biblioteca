@@ -2,6 +2,8 @@
 #define MP4_H
 
 #include "digitale.h"
+#include <string>
+#include <QDebug>
 
 class Mp4 : public Digitale
 {

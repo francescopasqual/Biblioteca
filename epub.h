@@ -2,6 +2,8 @@
 #define EPUB_H
 
 #include "digitale.h"
+#include <string>
+#include <QDebug>
 
 class Epub : public Digitale
 {

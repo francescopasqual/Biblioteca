@@ -3,7 +3,7 @@
 
 #include "fisico.h"
 #include <string>
-
+#include <QDebug>
 class Cartaceo : public Fisico
 {
     Q_OBJECT

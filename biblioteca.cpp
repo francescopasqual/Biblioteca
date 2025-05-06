@@ -8,8 +8,13 @@
 #include "vinile.h"
 
 
-// Costruttore
-//basta quello di default
+// Costruttore di default
+Biblioteca::Biblioteca(QObject *parent)
+    : QObject{parent}
+{
+    // Inizializza il catalogo come un vettore vuoto
+    catalogo = std::vector<Item*>();
+}
 
 Biblioteca::~Biblioteca()
 {

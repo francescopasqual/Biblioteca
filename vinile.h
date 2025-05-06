@@ -2,6 +2,8 @@
 #define VINILE_H
 
 #include "item.h"
+#include <string>
+#include <QDebug>
 
 class Vinile : public Item {
 private:
