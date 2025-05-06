@@ -59,37 +59,8 @@ AppController::AppController(QObject *parent)
 
     //Istanze del modello
     bibliotecaModel = new Biblioteca(this);
+    //Esempio: popoliamo qui la biblioteca
 
-    // --- Popolare la Biblioteca con dati di test ---
-    qDebug() << "AppController: Popolando la biblioteca con dati di test...";
-
-    // Esempio: Aggiungi un Libro
-    Libro* libro1 = new Libro("Il Signore degli Anelli", "J.R.R. Tolkien", "Fantasy", 1954, 5, 2, 500, this); // Parent è AppController
-    libro1->addFormato(new Cartaceo("978-8845292613", libro1)); // Parent è il libro
-    libro1->addFormato(new Epub(15, libro1)); // Parent è il libro
-    bibliotecaModel->addItem(libro1);
-    // Esempio: Aggiungi un altro Libro
-    Libro* libro2 = new Libro("1984", "George Orwell", "Dystopian", 1949, 2, 1, 300, this); // Parent è AppController
-    libro2->addFormato(new Cartaceo("978-0451524935", libro2)); // Parent è il libro
-    libro2->addFormato(new Epub(10, libro2)); // Parent è il libro
-    bibliotecaModel->addItem(libro2);
-
-    // Esempio: Aggiungi un Film
-    Film* film1 = new Film("Inception", "Christopher Nolan", "Sci-Fi", 2010, 3, 1, 120, "Stocazzo", this); // Parent AppController
-    film1->addFormato(new Disco(148, film1)); // Parent il film
-    film1->addFormato(new Mp4(2000, 148, film1)); // Parent il film
-    bibliotecaModel->addItem(film1);
-
-    // Esempio: Aggiungi un Vinile
-    Vinile* vinile1 = new Vinile("Kind of Blue", "Miles Davis", "Jazz", 1959, 2, 0, 5, 55, this); // Parent AppController
-    vinile1->addFormato(new Disco(45, vinile1)); // Un vinile può essere considerato un tipo di disco fisico
-    bibliotecaModel->addItem(vinile1);
-
-    // Aggiungi altri item di test con diversi formati, disponibilità, ecc.
-    // Assicurati che i costruttori delle tue classi Item e Formato accettino un QObject* parent.
-
-    qDebug() << "AppController: Popolazione dati di test completata. Items nel catalogo:" << bibliotecaModel->getCatalogo().size();
-    // --- Fine popolamento dati di test ---
 
     authenticator = new Authenticator(this);
 
@@ -174,27 +145,11 @@ void AppController::handleGlobalSearch(const QString &query)
     std::vector<Item*> resultsByTitle = bibliotecaModel->searchByTitle(stdQuery);
 
     // Ricerca per creatore (autore, regista, performer)
-    std::vector<Item*> resultsByCreator;
-    std::vector<Item*> authorResults = bibliotecaModel->searchByAuthor(stdQuery);
-    std::vector<Item*> registaResults = bibliotecaModel->searchByRegista(stdQuery);
-    std::vector<Item*> performerResults = bibliotecaModel->searchByPerformer(stdQuery);
-
-    // Elimino i duplicati dai creatori
-    std::set<Item*> uniqueCreatorResults;
-    for(Item* item : authorResults) uniqueCreatorResults.insert(item);
-    for(Item* item : registaResults) uniqueCreatorResults.insert(item);
-    for(Item* item : performerResults) uniqueCreatorResults.insert(item);
-    resultsByCreator.assign(uniqueCreatorResults.begin(), uniqueCreatorResults.end()); // Copia nel vettore
-
+    std::vector<Item*> resultsByCreator = bibliotecaModel->searchByCreator(stdQuery);
 
     // Ricerca per Anno (solo se la query è un numero valido)
-    std::vector<Item*> resultsByYear;
-    bool isNumber = false;
-    int year = query.toInt(&isNumber); // Tenta di convertire la query in int
-    if (isNumber) {
-        qDebug() << "AppController: Query rilevata come anno:" << year;
-        resultsByYear = bibliotecaModel->searchByYear(year);
-    }
+    //ma anno è una string quindi non serve
+    std::vector<Item*> resultsByYear = bibliotecaModel->searchByYear(stdQuery);
 
     //Combina i risultati delle ricerche
     std::set<Item*> finalUniqueResults; // Usa un set per garantire unicità

@@ -8,9 +8,13 @@ private:
     int pagine;
 
 public:
-    Libro(std::string t, std::string autore, std::string genere, int an, int c, int p, int pag, QObject* parent = nullptr);
-    std::string getTipoCreatore() const override;
+    // Costruttore
+    Libro(const string& id, const string& t, const string& autore, const string& genere, const string& an,
+          unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int pag, QObject* parent = nullptr);
+
     void showInfo() const override;
+
+    // Metodi specifici della classe Libro
     int getPagine() const;
 };
 

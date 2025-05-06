@@ -4,17 +4,21 @@
 #include "item.h"
 
 class Film : public Item {
-
 private:
-    int durata;//in minuti
-    std::string attore_principale;
+    int durata; // in minuti
+    string attore_principale;
 
 public:
-    Film(std::string t, std::string regista, std::string genere, int an, int c, int p, int d, std::string ap, QObject* parent = nullptr);
-    std::string getTipoCreatore() const override;
+    // Costruttore
+    Film(const string& id, const string& t, const string& regista, const string& genere, const string& an,
+         unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int d, const string& ap, QObject* parent = nullptr);
+
+    // Override dei metodi virtuali
     void showInfo() const override;
+
+    // Metodi specifici della classe Film
     int getDurata() const;
-    std::string getAttore_principale() const;
+    string getAttore_principale() const;
 };
 
 #endif // FILM_H

@@ -1,7 +1,16 @@
 #include "film.h"
-#include <iostream> // Necessario per usare std::cout, std::endl
+#include <iostream>
 
-// costruttore
+// Costruttore
+Film::Film(const string& id, const string& t, const string& regista, const string& genere, const string& an,
+           unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int d, const string& ap, QObject* parent)
+    // Chiama il costruttore della classe base Item
+    : Item(id, t, regista, genere, an, c, p, formati, parent),
+    durata(d),
+    attore_principale(ap)
+{}
+
+// Implementazione dei getter
 int Film::getDurata() const
 {
     return durata;
@@ -12,23 +21,14 @@ string Film::getAttore_principale() const
     return attore_principale;
 }
 
-Film::Film(std::string t, std::string regista, std::string genere, int an, int c, int p, int d, std::string ap, QObject* parent)
-    // Chiama il costruttore della classe base Item, passando il regista come "creatore"
-    : Item(t, regista, genere, an, c, p, parent), durata(d), attore_principale(ap)
-{
-    // Non ci sono membri specifici del Film da inizializzare in questo esempio semplice
-}
-
-string Film::getTipoCreatore() const
-{
-    return "Regista"; // Specifica la dicitura per i film
-}
 
 // Implementazione del metodo virtuale showInfo() per Film
 void Film::showInfo() const
 {
-    // Chiama il metodo showInfo() della classe base per stampare le informazioni comuni (Titolo, Regista, Genere, Anno, Copie)
+    // Chiama il metodo showInfo() della classe base per stampare le informazioni comuni
     Item::showInfo();
+    // Stampa le informazioni specifiche del Film
     std::cout << "Durata: " << durata << " minuti" << std::endl;
+    std::cout << "Attore principale: " << attore_principale << std::endl;
 }
 

@@ -22,6 +22,7 @@ SOURCES += \
     formato.cpp \
     item.cpp \
     itemdetailscreen.cpp \
+    itemfactory.cpp \
     itemlistscreen.cpp \
     libro.cpp \
     loginscreen.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
     formato.h \
     item.h \
     itemdetailscreen.h \
+    itemfactory.h \
     itemlistscreen.h \
     libro.h \
     loginscreen.h \

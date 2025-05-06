@@ -97,7 +97,7 @@ void ItemListScreen::toInsertItems(const std::vector<Item*>& items, const QStrin
         // Crea gli item per ogni cella della riga corrente
         QTableWidgetItem* titleItem = new QTableWidgetItem(QString::fromStdString(currentItem->getTitolo()));
         QTableWidgetItem* creatorItem = new QTableWidgetItem(QString::fromStdString(currentItem->getCreatore()));
-        QTableWidgetItem* yearItem = new QTableWidgetItem(QString::number(currentItem->getAnno())); // Converti int in QString
+        QTableWidgetItem* yearItem = new QTableWidgetItem(QString::fromStdString(currentItem->getAnno())); // Converti int in QString
 
         // Memorizza il puntatore all'item originale in Qt::UserRole
         titleItem->setData(Qt::UserRole, QVariant::fromValue<Item*>(currentItem));

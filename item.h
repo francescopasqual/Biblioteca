@@ -15,35 +15,44 @@ class Item : public QObject {
     Q_OBJECT
 
 protected:
-    std::string titolo;
-    std::string creatore;  // Autore/Regista/Performer
-    std::string genere;    // Genere comune
-    int anno;
-    int copie;
-    int prestiti;
+    string ID;
+    string titolo;
+    string creatore; // autore/regista/performer
+    unsigned int anno;
+    string genere;    // Genere comune
+    unsigned int copie;
+    unsigned int prestiti;
     std::vector<Formato*> formati;
 
 public:
-    Item(std::string t, std::string cr, std::string g, int an, int c, int p, QObject* parent = nullptr);
+    // Costruttore
+    Item(const string& id, const string& t, const string& cr, unsigned int an, const string& g, unsigned int c, unsigned int p, QObject* parent = nullptr);
+
+    // Distruttore virtuale
     virtual ~Item();
 
-    // Metodi virtuali puri per obbligare le sottoclassi a implementarli
-    virtual std::string getTipoCreatore() const = 0;  // "Autore", "Regista", "Performer"
     virtual void showInfo() const;
 
-    // Getter (implementati in Item.cpp)
-    std::string getTitolo() const;
-    std::string getCreatore() const;
-    std::string getGenere() const;
-    int getAnno() const;
-    int getCopie() const;
-    int getPrestiti() const;
-    bool isDisponibile() const;
+    // Getter
+    string getID() const;
+    string getTitolo() const;
+    string getCreatore() const;
+    string getGenere() const;
+    unsigned int getAnno() const;
+    unsigned int getCopie() const;
+    unsigned int getPrestiti() const;
     std::vector<Formato*> getFormati() const;
 
+    //Inserimento dei formati: funzione a parte perchè posso aggiungerlo sia in fase di costruzione che per aggiornare un item
+    void addFormato(Formato* formato);
+
+    // Metodi per la gestione dei prestiti
     bool incrementaPrestiti();
     bool decrementaPrestiti();
-    void addFormato(Formato *formato);
+    bool isAvailable() const;
+
+    // Factory method che verrà implementato in seguito
+    // static Item* create(ItemType type, ...);
 };
 
 #endif // ITEM_H

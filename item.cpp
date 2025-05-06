@@ -1,15 +1,12 @@
 #include "item.h"
 
 // Costruttore: inizializza i campi della classe base
-Item::Item(string t, string cr, string g, int an, int c, int p, QObject *parent)
-    : QObject(parent),
-    titolo(t),
-    creatore(cr),
-    genere(g),
-    anno(an),
-    copie(c),
-    prestiti(p)
-{}
+Item::Item(const string &id, const string &t, const string &cr, unsigned int an, const string &g, unsigned int c, unsigned int p, QObject *parent)
+    : QObject(parent), ID(id), titolo(t), creatore(cr), anno(an), genere(g), copie(c), prestiti(p)
+{
+    //vettore dei formati si inizializza vuoto di default
+
+}
 
 // Distruttore: dealloca i formati associati
 Item::~Item() {
@@ -18,63 +15,15 @@ Item::~Item() {
     }
 }
 
-// Getter per titolo
-string Item::getTitolo() const {
-    return titolo;
-}
-
-// Getter per anno
-int Item::getAnno() const {
-    return anno;
-}
-
-// Getter per copie disponibili
-int Item::getCopie() const {
-    return copie;
-}
-
-// Getter per prestiti attivi
-int Item::getPrestiti() const {
-    return prestiti;
-}
-
-// Verifica disponibilità
-bool Item::isDisponibile() const {
-    return (copie - prestiti) > 0;
-}
-
-// Getter per formati
-std::vector<Formato*> Item::getFormati() const {
-    return formati;
-}
-
-// Incrementa i prestiti se ci sono copie disponibili
-bool Item::incrementaPrestiti() {
-    if (isDisponibile()) {
-        prestiti++;
-        return true;
-    }
-    return false;
-}
-
-// Decrementa i prestiti se ci sono prestiti attivi
-bool Item::decrementaPrestiti() {
-    if (prestiti > 0) {
-        prestiti--;
-        return true;
-    }
-    return false;
-}
-
-// Metodo showInfo() base (da sovrascrivere nelle sottoclassi)
+// Metodo showInfo() base
 void Item::showInfo() const {
     cout << "Titolo: " << titolo << endl
-         << getTipoCreatore() << ": " << creatore << endl
+         << "Creatore: " << creatore << endl
          << "Genere: " << genere << endl
          << "Anno: " << anno << endl
          << "Copie disponibili: " << (copie - prestiti) << endl;
 
-    //Formati
+    // Formati
     if (formati.empty()) {
         std::cout << "  Nessun formato specificato." << std::endl;
     } else {
@@ -87,19 +36,38 @@ void Item::showInfo() const {
     std::cout << "-------------------------" << std::endl; // Separatore di chiusura
 }
 
+// Getters
+string Item::getID() const {return ID;}
+string Item::getTitolo() const {return titolo;}
+string Item::getCreatore() const {return creatore;}
+string Item::getGenere() const {return genere;}
+unsigned int Item::getAnno() const {return anno;}
+unsigned int Item::getCopie() const {return copie;}
+unsigned int Item::getPrestiti() const {return prestiti;}
+std::vector<Formato *> Item::getFormati() const {return formati;}
 
-// Aggiungiamo un metodo per aggiungere Formati a un Item
-void Item::addFormato(Formato* formato) {
-    if (formato) { // Controlla che il puntatore non sia nullo
-        formati.push_back(formato);
+void Item::addFormato(Formato *formato)
+{
+    formati.push_back(formato);
+}
+
+// Metodi per la gestione dei prestiti
+bool Item::incrementaPrestiti() {
+    if (isAvailable()) {
+        prestiti++;
+        return true;
     }
+    return false;
 }
 
-
-std::string Item::getCreatore() const {
-    return creatore;
+bool Item::decrementaPrestiti() {
+    if (prestiti > 0) {
+        prestiti--;
+        return true;
+    }
+    return false;
 }
 
-std::string Item::getGenere() const {
-    return genere;
+bool Item::isAvailable() const {
+    return (copie > prestiti);
 }

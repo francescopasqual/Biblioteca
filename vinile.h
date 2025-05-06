@@ -7,16 +7,17 @@
 
 class Vinile : public Item {
 private:
-
     int numeroTracce;
     int durataTotale;
 
 public:
-    Vinile(string t, string performer, string genere, int an, int c, int p, int nt, int dt, QObject* parent = nullptr);
-    string getTipoCreatore() const override;
+    // Costruttore
+    Vinile(const string& id, const string& t, const string& performer, const string& genere, const string& an,
+           unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int nt, int dt, QObject* parent = nullptr);
+
     void showInfo() const override;
 
-
+    // Metodi specifici della classe Vinile
     int getNumeroTracce() const;
     int getDurataTotale() const;
 };

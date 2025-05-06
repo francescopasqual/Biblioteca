@@ -65,6 +65,7 @@ SOURCES       = ../../appcontroller.cpp \
 		../../formato.cpp \
 		../../item.cpp \
 		../../itemdetailscreen.cpp \
+		../../itemfactory.cpp \
 		../../itemlistscreen.cpp \
 		../../libro.cpp \
 		../../loginscreen.cpp \
@@ -98,6 +99,7 @@ OBJECTS       = appcontroller.o \
 		formato.o \
 		item.o \
 		itemdetailscreen.o \
+		itemfactory.o \
 		itemlistscreen.o \
 		libro.o \
 		loginscreen.o \
@@ -369,6 +371,7 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../formato.h \
 		../../item.h \
 		../../itemdetailscreen.h \
+		../../itemfactory.h \
 		../../itemlistscreen.h \
 		../../libro.h \
 		../../loginscreen.h \
@@ -387,6 +390,7 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../formato.cpp \
 		../../item.cpp \
 		../../itemdetailscreen.cpp \
+		../../itemfactory.cpp \
 		../../itemlistscreen.cpp \
 		../../libro.cpp \
 		../../loginscreen.cpp \
@@ -903,8 +907,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../appcontroller.h ../../authenticator.h ../../biblioteca.h ../../cartaceo.h ../../catalogscreen.h ../../digitale.h ../../disco.h ../../epub.h ../../film.h ../../fisico.h ../../formato.h ../../item.h ../../itemdetailscreen.h ../../itemlistscreen.h ../../libro.h ../../loginscreen.h ../../mainwindow.h ../../mp4.h ../../vinile.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../appcontroller.cpp ../../authenticator.cpp ../../biblioteca.cpp ../../cartaceo.cpp ../../catalogscreen.cpp ../../digitale.cpp ../../disco.cpp ../../epub.cpp ../../film.cpp ../../fisico.cpp ../../formato.cpp ../../item.cpp ../../itemdetailscreen.cpp ../../itemlistscreen.cpp ../../libro.cpp ../../loginscreen.cpp ../../main.cpp ../../mainwindow.cpp ../../mp4.cpp ../../vinile.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../appcontroller.h ../../authenticator.h ../../biblioteca.h ../../cartaceo.h ../../catalogscreen.h ../../digitale.h ../../disco.h ../../epub.h ../../film.h ../../fisico.h ../../formato.h ../../item.h ../../itemdetailscreen.h ../../itemfactory.h ../../itemlistscreen.h ../../libro.h ../../loginscreen.h ../../mainwindow.h ../../mp4.h ../../vinile.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../appcontroller.cpp ../../authenticator.cpp ../../biblioteca.cpp ../../cartaceo.cpp ../../catalogscreen.cpp ../../digitale.cpp ../../disco.cpp ../../epub.cpp ../../film.cpp ../../fisico.cpp ../../formato.cpp ../../item.cpp ../../itemdetailscreen.cpp ../../itemfactory.cpp ../../itemlistscreen.cpp ../../libro.cpp ../../loginscreen.cpp ../../main.cpp ../../mainwindow.cpp ../../mp4.cpp ../../vinile.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1042,8 +1046,6 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		../../biblioteca.h \
-		../../item.h \
-		../../formato.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
@@ -1056,6 +1058,11 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../item.h \
+		../../formato.h \
+		../../libro.h \
+		../../film.h \
+		../../vinile.h \
 		../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1190,6 +1197,20 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHeaderView \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qheaderview.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVariant \
+		../../itemdetailscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QFormLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qformlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QGroupBox \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVector \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvector.h \
+		../../disco.h \
+		../../fisico.h \
+		../../mp4.h \
+		../../digitale.h \
+		../../epub.h \
+		../../cartaceo.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../appcontroller.h -o moc_appcontroller.cpp
@@ -1416,8 +1437,6 @@ moc_biblioteca.cpp: ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
-		../../item.h \
-		../../formato.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
@@ -1430,6 +1449,11 @@ moc_biblioteca.cpp: ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../item.h \
+		../../formato.h \
+		../../libro.h \
+		../../film.h \
+		../../vinile.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../biblioteca.h -o moc_biblioteca.cpp
@@ -1538,6 +1562,18 @@ moc_cartaceo.cpp: ../../cartaceo.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../cartaceo.h -o moc_cartaceo.cpp
@@ -1974,6 +2010,18 @@ moc_epub.cpp: ../../epub.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../epub.h -o moc_epub.cpp
@@ -3165,6 +3213,18 @@ moc_mp4.cpp: ../../mp4.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mp4.h -o moc_mp4.cpp
@@ -3288,8 +3348,6 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		../../biblioteca.h \
-		../../item.h \
-		../../formato.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
@@ -3302,6 +3360,11 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../item.h \
+		../../formato.h \
+		../../libro.h \
+		../../film.h \
+		../../vinile.h \
 		../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -3435,7 +3498,21 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QTableWidgetItem \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHeaderView \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVariant
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVariant \
+		../../itemdetailscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QFormLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qformlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QGroupBox \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVector \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvector.h \
+		../../disco.h \
+		../../fisico.h \
+		../../mp4.h \
+		../../digitale.h \
+		../../epub.h \
+		../../cartaceo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o appcontroller.o ../../appcontroller.cpp
 
 authenticator.o: ../../authenticator.cpp ../../authenticator.h \
@@ -3658,8 +3735,6 @@ biblioteca.o: ../../biblioteca.cpp ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
-		../../item.h \
-		../../formato.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
@@ -3672,6 +3747,8 @@ biblioteca.o: ../../biblioteca.cpp ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../item.h \
+		../../formato.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h
@@ -3780,7 +3857,19 @@ cartaceo.o: ../../cartaceo.cpp ../../cartaceo.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cartaceo.o ../../cartaceo.cpp
 
 catalogscreen.o: ../../catalogscreen.cpp ../../catalogscreen.h \
@@ -4210,7 +4299,19 @@ disco.o: ../../disco.cpp ../../disco.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o disco.o ../../disco.cpp
 
 epub.o: ../../epub.cpp ../../epub.h \
@@ -4316,7 +4417,19 @@ epub.o: ../../epub.cpp ../../epub.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o epub.o ../../epub.cpp
 
 film.o: ../../film.cpp ../../film.h \
@@ -4956,6 +5069,9 @@ itemdetailscreen.o: ../../itemdetailscreen.cpp ../../itemdetailscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QGroupBox \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgroupbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o itemdetailscreen.o ../../itemdetailscreen.cpp
+
+itemfactory.o: ../../itemfactory.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o itemfactory.o ../../itemfactory.cpp
 
 itemlistscreen.o: ../../itemlistscreen.cpp ../../itemlistscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
@@ -5676,9 +5792,12 @@ main.o: ../../main.cpp ../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QApplicatio
 		../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
 		../../biblioteca.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
 		../../item.h \
 		../../formato.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../libro.h \
+		../../film.h \
+		../../vinile.h \
 		../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -5763,7 +5882,21 @@ main.o: ../../main.cpp ../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QApplicatio
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QTableWidgetItem \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHeaderView \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVariant
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVariant \
+		../../itemdetailscreen.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QFormLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qformlayout.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QLayout \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QGroupBox \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVector \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvector.h \
+		../../disco.h \
+		../../fisico.h \
+		../../mp4.h \
+		../../digitale.h \
+		../../epub.h \
+		../../cartaceo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -6065,7 +6198,19 @@ mp4.o: ../../mp4.cpp ../../mp4.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mp4.o ../../mp4.cpp
 
 vinile.o: ../../vinile.cpp ../../vinile.h \
@@ -6171,7 +6316,19 @@ vinile.o: ../../vinile.cpp ../../vinile.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
-		../../formato.h
+		../../formato.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vinile.o ../../vinile.cpp
 
 moc_appcontroller.o: moc_appcontroller.cpp 

@@ -166,12 +166,12 @@ void ItemDetailScreen::displayDetails(Item *item)
     // Aggiorno label dei valori
     creatorValueLabel->setText(QString::fromStdString(item->getCreatore()));
     genreValueLabel->setText(QString::fromStdString(item->getGenere()));
-    yearValueLabel->setText(QString::number(item->getAnno()));
+    yearValueLabel->setText(QString::fromStdString(item->getAnno()));
     copiesValueLabel->setText(QString::number(item->getCopie()));
     loansValueLabel->setText(QString::number(item->getPrestiti()));
 
     //Logica di disponibilità al prestito
-    if (item->isDisponibile()) {
+    if (item->isAvailable()) {
         availabilityValueLabel->setText("Disponibile (" + QString::number(item->getCopie() - item->getPrestiti()) + " copie)");
         availabilityValueLabel->setStyleSheet("color: green; font-weight: bold;");
     } else {
@@ -208,10 +208,9 @@ void ItemDetailScreen::displayDetails(Item *item)
         formatsLayout->addStretch(1);
     }
 
-
     //BOTTONI
     //aggiorno lo stato (se cliccabile o meno) a seconda delle proprietà dell'item
-    loanButton->setEnabled(item->isDisponibile());
+    loanButton->setEnabled(item->isAvailable());
     keepButton->setEnabled(item->getPrestiti() > 0);
 }
 

@@ -1,17 +1,18 @@
 #include "libro.h"
-#include <iostream> // Necessario per usare std::cout, std::endl, std::string
+#include <iostream>
 
-//costruttore
-Libro::Libro(std::string t, std::string autore, std::string genere, int an, int c, int p, int pag, QObject* parent)
+// Costruttore
+Libro::Libro(const string& id, const string& t, const string& autore, const string& genere, const string& an,
+             unsigned int c, unsigned int p, const std::vector<Formato*>& formati, int pag, QObject* parent)
     // Chiama il costruttore della classe base Item
-    : Item(t, autore, genere, an, c, p, parent),
+    : Item(id, t, autore, genere, an, c, p, formati, parent),
     pagine(pag) // Inizializza il membro specifico di Libro
 {}
 
 // Implementazione del metodo virtuale showInfo() per Libro
 void Libro::showInfo() const
 {
-    // Chiama il metodo showInfo() della classe base per stampare le informazioni comuni (Titolo, Autore, Genere, Anno, Copie)
+    // Chiama il metodo showInfo() della classe base per stampare le informazioni comuni
     Item::showInfo();
     // Stampa le informazioni specifiche del Libro
     std::cout << "Pagine: " << pagine << std::endl;
@@ -23,8 +24,3 @@ int Libro::getPagine() const
     return pagine;
 }
 
-// Implementazione del metodo virtuale getTipoCreatore() per Libro
-std::string Libro::getTipoCreatore() const
-{
-    return "Autore"; // Specifica la dicitura per i libri
-}
