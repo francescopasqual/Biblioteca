@@ -5,10 +5,6 @@ Digitale::Digitale(unsigned int s, QObject *parent) : Formato(parent), sizeMB(s)
     qDebug() << "Chiamato costruttore di Digitale con sizeMB:" << s;
 }
 
-Digitale::~Digitale() {
-    qDebug() << "Chiamato distruttore di Digitale";
-}
-
 unsigned int Digitale::getSizeMB() const {
     qDebug() << "Chiamato getSizeMB() in Digitale";
     return sizeMB;

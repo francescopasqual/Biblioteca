@@ -5,9 +5,6 @@ Fisico::Fisico(QObject *parent) : Formato(parent) {
     qDebug() << "Chiamato costruttore di Fisico";
 }
 
-Fisico::~Fisico() {
-    qDebug() << "Chiamato distruttore di Fisico";
-}
 
 bool Fisico::richiedeSpazioFisico() const {
     qDebug() << "Chiamato richiedeSpazioFisico() in Fisico";

@@ -4,6 +4,7 @@
 #include "item.h"
 
 class Libro : public Item {
+
 private:
     int pagine;
 

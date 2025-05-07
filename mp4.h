@@ -14,6 +14,7 @@ private:
 
 public:
     explicit Mp4(unsigned int sizeMB, unsigned int durata, QObject *parent = nullptr);
+    ~Mp4() override = default;
 
 
     std::string descrizione() const override;

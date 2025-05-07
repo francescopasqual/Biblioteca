@@ -1,20 +1,19 @@
 #include "disco.h"
 #include <string> // Per std::to_string
 
-Disco::Disco(unsigned int durata, QObject *parent)
-    : Fisico(parent), durata(durata) {
-    qDebug() << "Chiamato costruttore di Disco con durata:" << durata;
+Disco::Disco(unsigned int bpm, QObject *parent)
+    : Fisico(parent), bpm(bpm) {
+    qDebug() << "Chiamato costruttore di Disco con bpm:" << bpm;
 }
-
 
 
 std::string Disco::descrizione() const
 {
     qDebug() << "Chiamato descrizione() in Disco";
-    return "Formato disco (Durata: " + std::to_string(durata) + " minuti)";
+    return "Formato disco, bpm: " + std::to_string(bpm);
 }
 
-unsigned int Disco::getDurata() const {
-    qDebug() << "Chiamato getDurata() in Disco";
-    return durata;
+unsigned int Disco::getbpm() const {
+    qDebug() << "Chiamato getbpm() in Disco";
+    return bpm;
 }

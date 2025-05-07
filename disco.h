@@ -10,14 +10,14 @@ class Disco : public Fisico
     Q_OBJECT
 
 private:
-    unsigned int durata;
+    unsigned int bpm;
 
 public:
-    explicit Disco(unsigned int durata, QObject *parent = nullptr);
+    explicit Disco(unsigned int bpm, QObject *parent = nullptr);
 
 
     std::string descrizione() const override;
-    unsigned int getDurata() const;
+    unsigned int getbpm() const;
 };
 
 #endif // DISCO_H

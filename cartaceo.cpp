@@ -1,9 +1,9 @@
 #include "cartaceo.h"
 #include <string>
 
-Cartaceo::Cartaceo(const std::string& isbn, QObject *parent)
-    : Fisico(parent), isbn(isbn) {
-    qDebug() << "Chiamato costruttore di Cartaceo con ISBN:" << QString::fromStdString(isbn);
+Cartaceo::Cartaceo(const std::string& tc, QObject *parent)
+    : Fisico(parent), tipo_copertina(tc) {
+    qDebug() << "Chiamato costruttore di Cartaceo con tipo di copertina:" << QString::fromStdString(tc);
 }
 
 
@@ -11,10 +11,10 @@ Cartaceo::Cartaceo(const std::string& isbn, QObject *parent)
 std::string Cartaceo::descrizione() const
 {
     qDebug() << "Chiamato descrizione() in Cartaceo";
-    return "Formato cartaceo (ISBN: " + isbn + ")";
+    return "Formato cartaceo con copertina: " + tipo_copertina + ")";
 }
 
-std::string Cartaceo::getIsbn() const {
+std::string Cartaceo::getTipoCopertina() const {
     qDebug() << "Chiamato getIsbn() in Cartaceo";
-    return isbn;
+    return tipo_copertina;
 }

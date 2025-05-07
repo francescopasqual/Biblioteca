@@ -81,6 +81,40 @@ AppController::AppController(QObject *parent)
         formatiLibro // Vettore di puntatori Formato*
         );
 
+    //altro libro con stessi formati
+    bibliotecaModel->createAndAddItem(
+        ItemType::LIBRO,
+        "ISBN9788845292614", // ID
+        "Il Pendolo di Foucault", // Titolo
+        "Umberto Eco", // Creatore (Autore)
+        1988, // Anno
+        "Romanzo Storico", // Genere
+        2, // Copie
+        ItemSpecificParams{.pagine = 700}, // Parametri specifici per Libro (pagine)
+        formatiLibro
+        );
+
+    //altro libro con formati diversi
+    std::vector<Formato*> formatiLibro2 = {
+        // Supponendo che tu abbia classi Formato concrete come Cartaceo, EPUB, PDF
+        new Cartaceo("Copertina morbida"),
+        new Epub(2) // 2 MB
+    };
+
+    bibliotecaModel->createAndAddItem(
+        ItemType::LIBRO,
+        "ISBN9788845292615", // ID
+        "Il Cacciatore di Aquiloni", // Titolo
+        "Khaled Hosseini", // Creatore (Autore)
+        2003, // Anno
+        "Romanzo", // Genere
+        1, // Copie
+        ItemSpecificParams{.pagine = 400}, // Parametri specifici per Libro (pagine)
+        formatiLibro2 // Vettore di puntatori Formato*
+        );
+
+
+
     // Esempio 2: Creare un Film con formati
     std::vector<Formato*> formatiFilm = {
         // Supponendo che tu abbia classi Formato concrete come MP4, Disco (Blu-ray/DVD)

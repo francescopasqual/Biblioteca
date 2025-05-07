@@ -10,14 +10,14 @@ class Cartaceo : public Fisico
     Q_OBJECT
 
 private:
-    std::string isbn;
+    std::string tipo_copertina;
 
 public:
-    explicit Cartaceo(const std::string& isbn, QObject *parent = nullptr);
+    explicit Cartaceo(const std::string& tc, QObject *parent = nullptr);
 
 
     std::string descrizione() const override;
-    std::string getIsbn() const;
+    std::string getTipoCopertina() const;
 };
 
 #endif // CARTACEO_H

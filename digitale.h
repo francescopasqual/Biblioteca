@@ -13,7 +13,7 @@ private:
 
 public:
     explicit Digitale(unsigned int s = 0, QObject *parent = nullptr);
-    virtual ~Digitale() override;
+    virtual ~Digitale() = default;
 
     // Mantiene descrizione come virtuale pura
     std::string descrizione() const override = 0;

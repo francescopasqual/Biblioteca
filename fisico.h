@@ -10,7 +10,7 @@ class Fisico : public Formato
 
 public:
     explicit Fisico(QObject *parent = nullptr);
-    virtual ~Fisico() override;
+    virtual ~Fisico() = default;
 
     // Mantiene il metodo descrizione come virtuale puro
     std::string descrizione() const override = 0;

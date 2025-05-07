@@ -32,6 +32,8 @@ struct ItemSpecificParams {
     std::optional<unsigned int> durataTotale;
 };
 
+
+//Si occupa di generare ogni tipo di Item, compresi i suoi formati
 class ItemFactory {
 
 public:
