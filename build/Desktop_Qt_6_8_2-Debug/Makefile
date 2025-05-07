@@ -57,6 +57,7 @@ SOURCES       = ../../appcontroller.cpp \
 		../../biblioteca.cpp \
 		../../cartaceo.cpp \
 		../../catalogscreen.cpp \
+		../../detailscreenvisitor.cpp \
 		../../digitale.cpp \
 		../../disco.cpp \
 		../../epub.cpp \
@@ -93,6 +94,7 @@ OBJECTS       = appcontroller.o \
 		biblioteca.o \
 		cartaceo.o \
 		catalogscreen.o \
+		detailscreenvisitor.o \
 		digitale.o \
 		disco.o \
 		epub.o \
@@ -367,6 +369,7 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../biblioteca.h \
 		../../cartaceo.h \
 		../../catalogscreen.h \
+		../../detailscreenvisitor.h \
 		../../digitale.h \
 		../../disco.h \
 		../../epub.h \
@@ -377,6 +380,7 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../itemdetailscreen.h \
 		../../itemfactory.h \
 		../../itemlistscreen.h \
+		../../itemvisitor.h \
 		../../libro.h \
 		../../loginscreen.h \
 		../../mainwindow.h \
@@ -387,6 +391,7 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../biblioteca.cpp \
 		../../cartaceo.cpp \
 		../../catalogscreen.cpp \
+		../../detailscreenvisitor.cpp \
 		../../digitale.cpp \
 		../../disco.cpp \
 		../../epub.cpp \
@@ -912,8 +917,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../appcontroller.h ../../authenticator.h ../../biblioteca.h ../../cartaceo.h ../../catalogscreen.h ../../digitale.h ../../disco.h ../../epub.h ../../film.h ../../fisico.h ../../formato.h ../../item.h ../../itemdetailscreen.h ../../itemfactory.h ../../itemlistscreen.h ../../libro.h ../../loginscreen.h ../../mainwindow.h ../../mp4.h ../../vinile.h ui_mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../appcontroller.cpp ../../authenticator.cpp ../../biblioteca.cpp ../../cartaceo.cpp ../../catalogscreen.cpp ../../digitale.cpp ../../disco.cpp ../../epub.cpp ../../film.cpp ../../fisico.cpp ../../formato.cpp ../../item.cpp ../../itemdetailscreen.cpp ../../itemfactory.cpp ../../itemlistscreen.cpp ../../libro.cpp ../../loginscreen.cpp ../../main.cpp ../../mainwindow.cpp ../../mp4.cpp ../../vinile.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../appcontroller.h ../../authenticator.h ../../biblioteca.h ../../cartaceo.h ../../catalogscreen.h ../../detailscreenvisitor.h ../../digitale.h ../../disco.h ../../epub.h ../../film.h ../../fisico.h ../../formato.h ../../item.h ../../itemdetailscreen.h ../../itemfactory.h ../../itemlistscreen.h ../../itemvisitor.h ../../libro.h ../../loginscreen.h ../../mainwindow.h ../../mp4.h ../../vinile.h ui_mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../appcontroller.cpp ../../authenticator.cpp ../../biblioteca.cpp ../../cartaceo.cpp ../../catalogscreen.cpp ../../detailscreenvisitor.cpp ../../digitale.cpp ../../disco.cpp ../../epub.cpp ../../film.cpp ../../fisico.cpp ../../formato.cpp ../../item.cpp ../../itemdetailscreen.cpp ../../itemfactory.cpp ../../itemlistscreen.cpp ../../libro.cpp ../../loginscreen.cpp ../../main.cpp ../../mainwindow.cpp ../../mp4.cpp ../../vinile.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1065,6 +1070,7 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
@@ -1457,6 +1463,7 @@ moc_biblioteca.cpp: ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
@@ -2469,6 +2476,7 @@ moc_item.cpp: ../../item.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
 	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../item.h -o moc_item.cpp
@@ -2687,6 +2695,7 @@ moc_itemdetailscreen.cpp: ../../itemdetailscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QLayout \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QGroupBox \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgroupbox.h \
 		moc_predefs.h \
@@ -2917,6 +2926,7 @@ moc_itemlistscreen.cpp: ../../itemlistscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QTableWidgetItem \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHeaderView \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qheaderview.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
@@ -3597,6 +3607,7 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
@@ -3985,6 +3996,7 @@ biblioteca.o: ../../biblioteca.cpp ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
@@ -4327,6 +4339,9 @@ catalogscreen.o: ../../catalogscreen.cpp ../../catalogscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialog.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o catalogscreen.o ../../catalogscreen.cpp
+
+detailscreenvisitor.o: ../../detailscreenvisitor.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o detailscreenvisitor.o ../../detailscreenvisitor.cpp
 
 digitale.o: ../../digitale.cpp ../../digitale.h \
 		../../formato.h \
@@ -4784,7 +4799,8 @@ film.o: ../../film.cpp ../../film.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
-		../../formato.h
+		../../formato.h \
+		../../itemvisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o film.o ../../film.cpp
 
 fisico.o: ../../fisico.cpp ../../fisico.h \
@@ -5122,7 +5138,8 @@ item.o: ../../item.cpp ../../item.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
-		../../formato.h
+		../../formato.h \
+		../../itemvisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o item.o ../../item.cpp
 
 itemdetailscreen.o: ../../itemdetailscreen.cpp ../../itemdetailscreen.h \
@@ -5339,6 +5356,7 @@ itemdetailscreen.o: ../../itemdetailscreen.cpp ../../itemdetailscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QLayout \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QGroupBox \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgroupbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o itemdetailscreen.o ../../itemdetailscreen.cpp
@@ -5447,6 +5465,7 @@ itemfactory.o: ../../itemfactory.cpp ../../itemfactory.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
@@ -5688,6 +5707,7 @@ itemlistscreen.o: ../../itemlistscreen.cpp ../../itemlistscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QTableWidgetItem \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHeaderView \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qheaderview.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
@@ -5797,7 +5817,8 @@ libro.o: ../../libro.cpp ../../libro.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
-		../../formato.h
+		../../formato.h \
+		../../itemvisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o libro.o ../../libro.cpp
 
 loginscreen.o: ../../loginscreen.cpp ../../loginscreen.h \
@@ -6186,6 +6207,7 @@ main.o: ../../main.cpp ../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QApplicatio
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
 		../../item.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
@@ -6710,6 +6732,7 @@ vinile.o: ../../vinile.cpp ../../vinile.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		../../formato.h \
+		../../itemvisitor.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \

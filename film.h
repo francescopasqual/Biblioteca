@@ -13,6 +13,12 @@ public:
     Film(const string &id, const string &t, const string &cr, unsigned int an, const string &g, unsigned int c,
          unsigned int p, unsigned int dur, const string &attore, QObject *parent = nullptr);
 
+    //Distruttore
+    ~Film() = default;
+
+    //Per visitor
+    void accept(ItemVisitor* visitor) override;
+
     // Override dei metodi virtuali
     void showInfo() const override;
 

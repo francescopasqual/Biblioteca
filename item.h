@@ -6,6 +6,7 @@
 #include <vector>
 #include "formato.h"
 #include <iostream>
+#include "itemvisitor.h"
 
 using std::string;
 using std::cout; using std::endl;
@@ -31,6 +32,10 @@ public:
     // Distruttore virtuale
     virtual ~Item();
 
+    //Per visitor
+    virtual void accept(ItemVisitor* visitor) = 0;
+
+    // Metodo virtuale puro per mostrare informazioni specifiche dell'item
     virtual void showInfo() const;
 
     // Getter

@@ -11,6 +11,11 @@ Vinile::Vinile(const string &id, const string &t, const string &cr, unsigned int
     //il vettore dei formati viene creato vuoto di default
 }
 
+void Vinile::accept(ItemVisitor *visitor)
+{
+    visitor->visit(this);
+}
+
 // Implementazione dei getter
 unsigned int Vinile::getNumeroTracce() const
 {

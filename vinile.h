@@ -15,6 +15,12 @@ public:
     Vinile(const string &id, const string &t, const string &cr, unsigned int an, const string &g, unsigned int c,
            unsigned int p, unsigned int numTracce, unsigned int durTotale, QObject *parent = nullptr);
 
+    //Distruttore
+    ~Vinile() = default;
+
+    // Visitor
+    void accept(ItemVisitor* visitor) override;
+
 
     void showInfo() const override;
 

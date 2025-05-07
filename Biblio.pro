@@ -19,6 +19,7 @@ HEADERS += appcontroller.h \
            biblioteca.h \
            cartaceo.h \
            catalogscreen.h \
+           detailscreenvisitor.h \
            digitale.h \
            disco.h \
            epub.h \
@@ -29,6 +30,7 @@ HEADERS += appcontroller.h \
            itemdetailscreen.h \
            itemfactory.h \
            itemlistscreen.h \
+           itemvisitor.h \
            libro.h \
            loginscreen.h \
            mainwindow.h \
@@ -40,6 +42,7 @@ SOURCES += appcontroller.cpp \
            biblioteca.cpp \
            cartaceo.cpp \
            catalogscreen.cpp \
+           detailscreenvisitor.cpp \
            digitale.cpp \
            disco.cpp \
            epub.cpp \

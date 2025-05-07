@@ -9,6 +9,11 @@ Libro::Libro(const string &id, const string &t, const string &cr, unsigned int a
     //il vettore dei formati viene creato vuoto di default
 }
 
+void Libro::accept(ItemVisitor* visitor)
+{
+    visitor->visit(this);
+}
+
 
 // Implementazione del metodo virtuale showInfo() per Libro
 void Libro::showInfo() const

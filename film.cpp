@@ -11,6 +11,11 @@ Film::Film(const string &id, const string &t, const string &cr, unsigned int an,
     //il vettore dei formati viene creato vuoto di default
 }
 
+void Film::accept(ItemVisitor *visitor)
+{
+    visitor->visit(this);
+}
+
 // Implementazione dei getter
 unsigned int Film::getDurata() const
 {
