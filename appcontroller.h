@@ -27,6 +27,7 @@
 #include "mp4.h"
 #include "epub.h"
 #include "cartaceo.h"
+#include "itemfactory.h"
 
 class AppController : public QObject
 {

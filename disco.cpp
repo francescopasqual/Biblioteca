@@ -6,9 +6,7 @@ Disco::Disco(unsigned int durata, QObject *parent)
     qDebug() << "Chiamato costruttore di Disco con durata:" << durata;
 }
 
-Disco::~Disco() {
-    qDebug() << "Chiamato distruttore di Disco";
-}
+
 
 std::string Disco::descrizione() const
 {

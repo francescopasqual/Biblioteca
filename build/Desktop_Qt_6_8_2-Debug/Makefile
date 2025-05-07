@@ -16,8 +16,8 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-INCPATH       = -I../../../Biblio -I. -I../../../../Qt/6.8.2/gcc_64/include -I../../../../Qt/6.8.2/gcc_64/include/QtWidgets -I../../../../Qt/6.8.2/gcc_64/include/QtGui -I../../../../Qt/6.8.2/gcc_64/include/QtCore -I. -I../../../../Qt/6.8.2/gcc_64/mkspecs/linux-g++
+CXXFLAGS      = -pipe -g -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
+INCPATH       = -I../../../Biblio -I. -I../../../Biblio -I../../../../Qt/6.8.2/gcc_64/include -I../../../../Qt/6.8.2/gcc_64/include/QtWidgets -I../../../../Qt/6.8.2/gcc_64/include/QtGui -I../../../../Qt/6.8.2/gcc_64/include/QtCore -I. -I../../../../Qt/6.8.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/francesco/Qt/6.8.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -78,7 +78,9 @@ SOURCES       = ../../appcontroller.cpp \
 		moc_cartaceo.cpp \
 		moc_catalogscreen.cpp \
 		moc_digitale.cpp \
+		moc_disco.cpp \
 		moc_epub.cpp \
+		moc_fisico.cpp \
 		moc_formato.cpp \
 		moc_item.cpp \
 		moc_itemdetailscreen.cpp \
@@ -113,7 +115,9 @@ OBJECTS       = appcontroller.o \
 		moc_cartaceo.o \
 		moc_catalogscreen.o \
 		moc_digitale.o \
+		moc_disco.o \
 		moc_epub.o \
+		moc_fisico.o \
 		moc_formato.o \
 		moc_item.o \
 		moc_itemdetailscreen.o \
@@ -377,7 +381,8 @@ DIST          = /Qt/6.8.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../loginscreen.h \
 		../../mainwindow.h \
 		../../mp4.h \
-		../../vinile.h ../../appcontroller.cpp \
+		../../vinile.h \
+		ui_mainwindow.h ../../appcontroller.cpp \
 		../../authenticator.cpp \
 		../../biblioteca.cpp \
 		../../cartaceo.cpp \
@@ -907,7 +912,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../appcontroller.h ../../authenticator.h ../../biblioteca.h ../../cartaceo.h ../../catalogscreen.h ../../digitale.h ../../disco.h ../../epub.h ../../film.h ../../fisico.h ../../formato.h ../../item.h ../../itemdetailscreen.h ../../itemfactory.h ../../itemlistscreen.h ../../libro.h ../../loginscreen.h ../../mainwindow.h ../../mp4.h ../../vinile.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../appcontroller.h ../../authenticator.h ../../biblioteca.h ../../cartaceo.h ../../catalogscreen.h ../../digitale.h ../../disco.h ../../epub.h ../../film.h ../../fisico.h ../../formato.h ../../item.h ../../itemdetailscreen.h ../../itemfactory.h ../../itemlistscreen.h ../../libro.h ../../loginscreen.h ../../mainwindow.h ../../mp4.h ../../vinile.h ui_mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../../appcontroller.cpp ../../authenticator.cpp ../../biblioteca.cpp ../../cartaceo.cpp ../../catalogscreen.cpp ../../digitale.cpp ../../disco.cpp ../../epub.cpp ../../film.cpp ../../fisico.cpp ../../formato.cpp ../../item.cpp ../../itemdetailscreen.cpp ../../itemfactory.cpp ../../itemlistscreen.cpp ../../libro.cpp ../../loginscreen.cpp ../../main.cpp ../../mainwindow.cpp ../../mp4.cpp ../../vinile.cpp $(DISTDIR)/
 
 
@@ -938,11 +943,11 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp
-	g++ -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o moc_predefs.h ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp
+	g++ -pipe -g -Wall -Wextra -fPIC -dM -E -o moc_predefs.h ../../../../Qt/6.8.2/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_appcontroller.cpp moc_authenticator.cpp moc_biblioteca.cpp moc_cartaceo.cpp moc_catalogscreen.cpp moc_digitale.cpp moc_epub.cpp moc_formato.cpp moc_item.cpp moc_itemdetailscreen.cpp moc_itemlistscreen.cpp moc_loginscreen.cpp moc_mainwindow.cpp moc_mp4.cpp
+compiler_moc_header_make_all: moc_appcontroller.cpp moc_authenticator.cpp moc_biblioteca.cpp moc_cartaceo.cpp moc_catalogscreen.cpp moc_digitale.cpp moc_disco.cpp moc_epub.cpp moc_fisico.cpp moc_formato.cpp moc_item.cpp moc_itemdetailscreen.cpp moc_itemlistscreen.cpp moc_loginscreen.cpp moc_mainwindow.cpp moc_mp4.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_appcontroller.cpp moc_authenticator.cpp moc_biblioteca.cpp moc_cartaceo.cpp moc_catalogscreen.cpp moc_digitale.cpp moc_epub.cpp moc_formato.cpp moc_item.cpp moc_itemdetailscreen.cpp moc_itemlistscreen.cpp moc_loginscreen.cpp moc_mainwindow.cpp moc_mp4.cpp
+	-$(DEL_FILE) moc_appcontroller.cpp moc_authenticator.cpp moc_biblioteca.cpp moc_cartaceo.cpp moc_catalogscreen.cpp moc_digitale.cpp moc_disco.cpp moc_epub.cpp moc_fisico.cpp moc_formato.cpp moc_item.cpp moc_itemdetailscreen.cpp moc_itemlistscreen.cpp moc_loginscreen.cpp moc_mainwindow.cpp moc_mp4.cpp
 moc_appcontroller.cpp: ../../appcontroller.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
@@ -1063,6 +1068,7 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
+		../../itemfactory.h \
 		../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1213,7 +1219,7 @@ moc_appcontroller.cpp: ../../appcontroller.h \
 		../../cartaceo.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../appcontroller.h -o moc_appcontroller.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../appcontroller.h -o moc_appcontroller.cpp
 
 moc_authenticator.cpp: ../../authenticator.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
@@ -1333,7 +1339,7 @@ moc_authenticator.cpp: ../../authenticator.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../authenticator.h -o moc_authenticator.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../authenticator.h -o moc_authenticator.cpp
 
 moc_biblioteca.cpp: ../../biblioteca.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
@@ -1454,9 +1460,10 @@ moc_biblioteca.cpp: ../../biblioteca.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
+		../../itemfactory.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../biblioteca.h -o moc_biblioteca.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../biblioteca.h -o moc_biblioteca.cpp
 
 moc_cartaceo.cpp: ../../cartaceo.h \
 		../../fisico.h \
@@ -1576,7 +1583,7 @@ moc_cartaceo.cpp: ../../cartaceo.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../cartaceo.h -o moc_cartaceo.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../cartaceo.h -o moc_cartaceo.cpp
 
 moc_catalogscreen.cpp: ../../catalogscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
@@ -1797,7 +1804,7 @@ moc_catalogscreen.cpp: ../../catalogscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../catalogscreen.h -o moc_catalogscreen.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../catalogscreen.h -o moc_catalogscreen.cpp
 
 moc_digitale.cpp: ../../digitale.h \
 		../../formato.h \
@@ -1904,7 +1911,127 @@ moc_digitale.cpp: ../../digitale.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../digitale.h -o moc_digitale.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../digitale.h -o moc_digitale.cpp
+
+moc_disco.cpp: ../../disco.h \
+		../../fisico.h \
+		../../formato.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfiginclude.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationdefinitions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qassert.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtnoop.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypes.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversion.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qyieldcpu.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qforeach.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmalloc.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qminmax.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qoverload.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qswap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtresource.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttranslation.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcomparehelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpair.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20functional.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20memory.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlatin1stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qanystringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfloat16.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmath.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterable.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		moc_predefs.h \
+		../../../../Qt/6.8.2/gcc_64/libexec/moc
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../disco.h -o moc_disco.cpp
 
 moc_epub.cpp: ../../epub.h \
 		../../digitale.h \
@@ -2024,7 +2151,114 @@ moc_epub.cpp: ../../epub.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../epub.h -o moc_epub.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../epub.h -o moc_epub.cpp
+
+moc_fisico.cpp: ../../fisico.h \
+		../../formato.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfiginclude.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationdefinitions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qassert.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtnoop.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypes.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversion.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qyieldcpu.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qforeach.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmalloc.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qminmax.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qoverload.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qswap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtresource.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttranslation.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcomparehelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpair.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20functional.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20memory.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlatin1stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qanystringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfloat16.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmath.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterable.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		moc_predefs.h \
+		../../../../Qt/6.8.2/gcc_64/libexec/moc
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../fisico.h -o moc_fisico.cpp
 
 moc_formato.cpp: ../../formato.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
@@ -2130,7 +2364,7 @@ moc_formato.cpp: ../../formato.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../formato.h -o moc_formato.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../formato.h -o moc_formato.cpp
 
 moc_item.cpp: ../../item.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
@@ -2237,7 +2471,7 @@ moc_item.cpp: ../../item.h \
 		../../formato.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../item.h -o moc_item.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../item.h -o moc_item.cpp
 
 moc_itemdetailscreen.cpp: ../../itemdetailscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
@@ -2457,7 +2691,7 @@ moc_itemdetailscreen.cpp: ../../itemdetailscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgroupbox.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../itemdetailscreen.h -o moc_itemdetailscreen.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../itemdetailscreen.h -o moc_itemdetailscreen.cpp
 
 moc_itemlistscreen.cpp: ../../itemlistscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
@@ -2689,7 +2923,7 @@ moc_itemlistscreen.cpp: ../../itemlistscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/QVariant \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../itemlistscreen.h -o moc_itemlistscreen.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../itemlistscreen.h -o moc_itemlistscreen.cpp
 
 moc_loginscreen.cpp: ../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
@@ -2909,13 +3143,10 @@ moc_loginscreen.cpp: ../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QHBoxLayout \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../loginscreen.h -o moc_loginscreen.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../loginscreen.h -o moc_loginscreen.cpp
 
 moc_mainwindow.cpp: ../../mainwindow.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversionchecks.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfiginclude.h \
@@ -2961,6 +3192,10 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtresource.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttranslation.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiglobal.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtgui-config.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiexports.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
@@ -2972,7 +3207,6 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcomparehelpers.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20type_traits.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
@@ -3105,9 +3339,10 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QStackedWidget \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstackedwidget.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
 
 moc_mp4.cpp: ../../mp4.h \
 		../../digitale.h \
@@ -3227,7 +3462,7 @@ moc_mp4.cpp: ../../mp4.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		moc_predefs.h \
 		../../../../Qt/6.8.2/gcc_64/libexec/moc
-	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mp4.h -o moc_mp4.cpp
+	/home/francesco/Qt/6.8.2/gcc_64/libexec/moc $(DEFINES) --include /home/francesco/Desktop/Biblio/build/Desktop_Qt_6_8_2-Debug/moc_predefs.h -I/home/francesco/Qt/6.8.2/gcc_64/mkspecs/linux-g++ -I/home/francesco/Desktop/Biblio -I/home/francesco/Desktop/Biblio -I/home/francesco/Qt/6.8.2/gcc_64/include -I/home/francesco/Qt/6.8.2/gcc_64/include/QtWidgets -I/home/francesco/Qt/6.8.2/gcc_64/include/QtGui -I/home/francesco/Qt/6.8.2/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mp4.h -o moc_mp4.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -3365,6 +3600,7 @@ appcontroller.o: ../../appcontroller.cpp ../../appcontroller.h \
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
+		../../itemfactory.h \
 		../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -3751,7 +3987,8 @@ biblioteca.o: ../../biblioteca.cpp ../../biblioteca.h \
 		../../formato.h \
 		../../libro.h \
 		../../film.h \
-		../../vinile.h
+		../../vinile.h \
+		../../itemfactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o biblioteca.o ../../biblioteca.cpp
 
 cartaceo.o: ../../cartaceo.cpp ../../cartaceo.h \
@@ -4193,7 +4430,19 @@ digitale.o: ../../digitale.cpp ../../digitale.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o digitale.o ../../digitale.cpp
 
 disco.o: ../../disco.cpp ../../disco.h \
@@ -4640,7 +4889,19 @@ fisico.o: ../../fisico.cpp ../../fisico.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fisico.o ../../fisico.cpp
 
 formato.o: ../../formato.cpp ../../formato.h \
@@ -4744,7 +5005,19 @@ formato.o: ../../formato.cpp ../../formato.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o formato.o ../../formato.cpp
 
 item.o: ../../item.cpp ../../item.h \
@@ -5070,7 +5343,125 @@ itemdetailscreen.o: ../../itemdetailscreen.cpp ../../itemdetailscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qgroupbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o itemdetailscreen.o ../../itemdetailscreen.cpp
 
-itemfactory.o: ../../itemfactory.cpp 
+itemfactory.o: ../../itemfactory.cpp ../../itemfactory.h \
+		../../item.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QObject \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfiginclude.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationdefinitions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qassert.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtnoop.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypes.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversion.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qyieldcpu.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qforeach.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmalloc.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qminmax.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qoverload.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qswap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtresource.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttranslation.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcomparehelpers.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qpair.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20functional.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20memory.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlatin1stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qanystringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfloat16.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmath.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qiterable.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../formato.h \
+		../../libro.h \
+		../../film.h \
+		../../vinile.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qmap.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qset.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qhash.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qvarlengtharray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o itemfactory.o ../../itemfactory.cpp
 
 itemlistscreen.o: ../../itemlistscreen.cpp ../../itemlistscreen.h \
@@ -5798,6 +6189,7 @@ main.o: ../../main.cpp ../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QApplicatio
 		../../libro.h \
 		../../film.h \
 		../../vinile.h \
+		../../itemfactory.h \
 		../../loginscreen.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -5900,10 +6292,7 @@ main.o: ../../main.cpp ../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QApplicatio
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtversionchecks.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtconfiginclude.h \
@@ -5949,6 +6338,10 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtresource.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qttranslation.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiglobal.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtgui-config.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtGui/qtguiexports.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
@@ -5960,7 +6353,6 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcompare.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qcomparehelpers.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/q20type_traits.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtCore/qobject.h \
@@ -6092,7 +6484,8 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QStackedWidget \
 		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qstackedwidget.h \
-		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qframe.h
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.8.2/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
 mp4.o: ../../mp4.cpp ../../mp4.h \
@@ -6349,8 +6742,14 @@ moc_catalogscreen.o: moc_catalogscreen.cpp
 moc_digitale.o: moc_digitale.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_digitale.o moc_digitale.cpp
 
+moc_disco.o: moc_disco.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_disco.o moc_disco.cpp
+
 moc_epub.o: moc_epub.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_epub.o moc_epub.cpp
+
+moc_fisico.o: moc_fisico.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_fisico.o moc_fisico.cpp
 
 moc_formato.o: moc_formato.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_formato.o moc_formato.cpp
@@ -6375,18 +6774,9 @@ moc_mp4.o: moc_mp4.cpp
 
 ####### Install
 
-install_target: first FORCE
-	@test -d $(INSTALL_ROOT)/opt/Biblio/bin || mkdir -p $(INSTALL_ROOT)/opt/Biblio/bin
-	$(QINSTALL_PROGRAM) $(QMAKE_TARGET) $(INSTALL_ROOT)/opt/Biblio/bin/$(QMAKE_TARGET)
+install:  FORCE
 
-uninstall_target: FORCE
-	-$(DEL_FILE) $(INSTALL_ROOT)/opt/Biblio/bin/$(QMAKE_TARGET)
-	-$(DEL_DIR) $(INSTALL_ROOT)/opt/Biblio/bin/ 
-
-
-install: install_target  FORCE
-
-uninstall: uninstall_target  FORCE
+uninstall:  FORCE
 
 FORCE:
 

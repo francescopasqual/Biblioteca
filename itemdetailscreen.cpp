@@ -166,7 +166,7 @@ void ItemDetailScreen::displayDetails(Item *item)
     // Aggiorno label dei valori
     creatorValueLabel->setText(QString::fromStdString(item->getCreatore()));
     genreValueLabel->setText(QString::fromStdString(item->getGenere()));
-    yearValueLabel->setText(QString::fromStdString(item->getAnno()));
+    yearValueLabel->setText(QString::number(item->getAnno())); // Converti int in QString
     copiesValueLabel->setText(QString::number(item->getCopie()));
     loansValueLabel->setText(QString::number(item->getPrestiti()));
 

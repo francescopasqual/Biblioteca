@@ -12,6 +12,12 @@ unsigned int Mp4::getDurata() const
     return durata;
 }
 
+bool Mp4::richiedeConnessione() const
+{
+    qDebug() << "Chiamato richiedeConnessione() in Mp4";
+    return true; // Gli MP4 richiedono connessione per lo streaming
+}
+
 // Implementazione completa di descrizione() in Mp4
 std::string Mp4::descrizione() const
 {

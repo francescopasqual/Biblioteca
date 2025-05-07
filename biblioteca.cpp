@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <iostream>
 
+
+
 // Costruttore
 Biblioteca::Biblioteca(QObject *parent)
     : QObject{parent}

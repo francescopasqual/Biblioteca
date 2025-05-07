@@ -59,7 +59,72 @@ AppController::AppController(QObject *parent)
 
     //Istanze del modello
     bibliotecaModel = new Biblioteca(this);
-    //Esempio: popoliamo qui la biblioteca
+    //Esempio: popoliamo qui la biblioteca usando la factory
+    // --- Creazione di item di esempio ---
+
+        // Esempio 1: Creare un Libro con formati
+        // Devi creare i Formato* prima di passare il vettore a createAndAddItem
+        std::vector<Formato*> formatiLibro = {
+            // Supponendo che tu abbia classi Formato concrete come Cartaceo, EPUB, PDF
+            new Cartaceo("Copertina rigida"),
+            new Epub(5), // 5 MB
+        };
+    bibliotecaModel->createAndAddItem(
+        ItemType::LIBRO,
+        "ISBN9788845292613", // ID
+        "Il Nome della Rosa", // Titolo
+        "Umberto Eco", // Creatore (Autore)
+        1980, // Anno
+        "Romanzo Storico", // Genere
+        3, // Copie
+        ItemSpecificParams{.pagine = 550}, // Parametri specifici per Libro (pagine)
+        formatiLibro // Vettore di puntatori Formato*
+        );
+
+    // Esempio 2: Creare un Film con formati
+    std::vector<Formato*> formatiFilm = {
+        // Supponendo che tu abbia classi Formato concrete come MP4, Disco (Blu-ray/DVD)
+        new Mp4(700, 178), // 700 MB, 178 minuti,
+        new Disco(120) // Disco Blu-ray con 120 minuti di durata
+    };
+    ItemSpecificParams paramsFilm;
+    paramsFilm.durata = 178; // Durata in minuti
+    paramsFilm.attore_principale = "Matthew McConaughey";
+    bibliotecaModel->createAndAddItem(
+        ItemType::FILM,
+        "IMDBTT0816692", // ID
+        "Interstellar", // Titolo
+        "Christopher Nolan", // Creatore (Regista)
+        2014, // Anno
+        "Sci-Fi", // Genere
+        2, // Copie
+        paramsFilm, // Parametri specifici per Film
+        formatiFilm // Vettore di puntatori Formato*
+        );
+
+    // Esempio 3: Creare un Vinile con formati
+    std::vector<Formato*> formatiVinile = {
+        // Supponendo che tu abbia una classe Formato Vinile specifica o generica come Fisico
+        new Disco(25)
+    };
+    ItemSpecificParams paramsVinile;
+    paramsVinile.numeroTracce = 9;
+    paramsVinile.durataTotale = 42; // Durata in minuti
+    bibliotecaModel->createAndAddItem(
+        ItemType::VINILE,
+        "MUSICTHR001", // ID
+        "Thriller", // Titolo
+        "Michael Jackson", // Creatore (Artista)
+        1982, // Anno
+        "Pop", // Genere
+        1, // Copie
+        paramsVinile, // Parametri specifici per Vinile
+        formatiVinile // Vettore di puntatori Formato*
+        );
+
+    // --- Fine creazione item di esempio ---
+
+
 
 
     authenticator = new Authenticator(this);
@@ -148,8 +213,17 @@ void AppController::handleGlobalSearch(const QString &query)
     std::vector<Item*> resultsByCreator = bibliotecaModel->searchByCreator(stdQuery);
 
     // Ricerca per Anno (solo se la query è un numero valido)
-    //ma anno è una string quindi non serve
-    std::vector<Item*> resultsByYear = bibliotecaModel->searchByYear(stdQuery);
+    //anno è unsigned int, query è una stringa;
+    //PATTERN PER CONVERSIONI STRING => INT E VALIDAZIONE
+    unsigned int year = 0;
+    bool isYearValid = false;
+    try {
+        year = std::stoul(stdQuery); // Prova a convertire la query in unsigned int
+        isYearValid = true; // Se non lancia eccezione, è valido
+    } catch (const std::invalid_argument&) {
+        isYearValid = false; // Non è un numero valido
+    }
+    std::vector<Item*> resultsByYear = bibliotecaModel->searchByYear(year);
 
     //Combina i risultati delle ricerche
     std::set<Item*> finalUniqueResults; // Usa un set per garantire unicità

@@ -14,7 +14,7 @@ private:
 
 public:
     explicit Mp4(unsigned int sizeMB, unsigned int durata, QObject *parent = nullptr);
-    ~Mp4() override;
+
 
     std::string descrizione() const override;
     unsigned int getDurata() const;

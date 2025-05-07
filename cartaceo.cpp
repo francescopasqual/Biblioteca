@@ -6,9 +6,7 @@ Cartaceo::Cartaceo(const std::string& isbn, QObject *parent)
     qDebug() << "Chiamato costruttore di Cartaceo con ISBN:" << QString::fromStdString(isbn);
 }
 
-Cartaceo::~Cartaceo() {
-    qDebug() << "Chiamato distruttore di Cartaceo";
-}
+
 
 std::string Cartaceo::descrizione() const
 {

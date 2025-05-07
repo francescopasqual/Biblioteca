@@ -14,7 +14,7 @@ private:
 
 public:
     explicit Disco(unsigned int durata, QObject *parent = nullptr);
-    ~Disco() override;
+
 
     std::string descrizione() const override;
     unsigned int getDurata() const;

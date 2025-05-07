@@ -6,9 +6,7 @@ Epub::Epub(unsigned int sizeMB, QObject *parent)
     qDebug() << "Chiamato costruttore di Epub con sizeMB:" << sizeMB;
 }
 
-Epub::~Epub() {
-    qDebug() << "Chiamato distruttore di Epub";
-}
+
 
 std::string Epub::descrizione() const
 {

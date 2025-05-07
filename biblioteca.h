@@ -11,6 +11,7 @@
 #include "vinile.h"
 #include "itemfactory.h"
 
+
 class Biblioteca : public QObject
 {
     Q_OBJECT

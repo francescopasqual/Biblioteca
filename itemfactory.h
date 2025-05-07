@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 
+
 // Enum per identificare il tipo di Item
 enum class ItemType {
     LIBRO,
@@ -32,7 +33,9 @@ struct ItemSpecificParams {
 };
 
 class ItemFactory {
+
 public:
+
     // Factory method che crea l'item appropriato basandosi sul tipo
     static Item* createItem(
         ItemType type,

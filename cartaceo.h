@@ -14,7 +14,7 @@ private:
 
 public:
     explicit Cartaceo(const std::string& isbn, QObject *parent = nullptr);
-    ~Cartaceo() override;
+
 
     std::string descrizione() const override;
     std::string getIsbn() const;

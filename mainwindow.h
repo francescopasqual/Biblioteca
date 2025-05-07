@@ -1,8 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "qtmetamacros.h"
 #include <QMainWindow>
 #include <QStackedWidget> // Necessario per lo stacked widget
+#include <QWidget> // Necessario per QWidget
 
 class MainWindow : public QMainWindow
 {
